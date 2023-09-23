@@ -7,17 +7,18 @@
 
 import SwiftUI
 import Combine
+import ComposableArchitecture
 
 @MainActor
 struct ChatListView: View {
-    @State private var state = ChartListState()
+    //    @State private var state = ChartListState()
+    let store: StoreOf<Feature>
 
-    var body: some View {
-        ScrollViewReader { scrollViewProxy in
-            // Listを使うと、insertのアニメーションとscrollToBottomのアニメーションがうまく動かない
+    private var scrollView: some View {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ScrollView {
                 VStack(spacing: 8) {
-                    ForEach(state.messages) { messageItem in
+                    ForEach(viewStore.messages) { messageItem in
                         HStack {
                             ChatBubbleView(
                                 item: messageItem,
@@ -27,9 +28,9 @@ struct ChatListView: View {
                                 Task {
                                     switch messageItem.readingStatus {
                                     case .readingError:
-                                        await state.readErrorText(messageItem: messageItem)
+                                        viewStore.send(.readErrorMessage(messageItem: messageItem))
                                     case .willRead:
-                                        state.deleteMessage(messageItem: messageItem)
+                                        viewStore.send(.deleteMessage(messageItem: messageItem))
                                     default:
                                         break
                                     }
@@ -52,55 +53,88 @@ struct ChatListView: View {
                     //                .onAppear {
                     //                    UITableView.appearance().separatorStyle = .none
                     //                }
-                    .onChange(of: state.messages, initial: true) {
-                        //                    scrollToBottom(scrollViewProxy: scrollViewProxy)
-                    }
+                    //                .onChange(of: state.messages, initial: true) {
+                    //                    //                    scrollToBottom(scrollViewProxy: scrollViewProxy)
+                    //                }
                     Spacer()
                         .frame(height: 16)
                 }
+                .padding()
             }
-            HStack {
-                TextField("Enter text", text: $state.newMessage, axis: .vertical)
-                    .submitLabel(.send)
-                    .textFieldStyle(.roundedBorder)
-                Button(action: {
-                    if !state.newMessage.trimmed().isEmpty {
-                        addMessage(text: state.newMessage.trimmed(), scrollViewProxy: scrollViewProxy)
+        }
+    }
+
+    var body: some View {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            NavigationStack {
+                ScrollViewReader { scrollViewProxy in
+                    // Listを使うと、insertのアニメーションとscrollToBottomのアニメーションがうまく動かない
+                    scrollView
+                    HStack {
+                        TextField("Enter text", text: viewStore.binding(get: { state in
+                            state.newMessage
+                        }, send: Feature.Action.textChanged), axis: .vertical)
+                        .submitLabel(.send)
+                        .textFieldStyle(.roundedBorder)
+                        Button(action: {
+                            if !viewStore.newMessage.trimmed().isEmpty {
+                                withAnimation(.spring) {
+                                    viewStore.send(.addMessage(text: viewStore.newMessage.trimmed()))
+                                    // iOS17~/macOS14〜ではwithAnimationのcompletionを使用する
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        scrollToBottom(id: viewStore.messages.last?.id ?? "", scrollViewProxy: scrollViewProxy)
+                                    }
+                                }
+
+                            }
+                        }, label: {
+                            Text("Send")
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .clipShape(Capsule())
+                        })
+                        .controlSize(.regular)
                     }
-                }, label: {
-                    Text("Send")
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
-                })
-                .controlSize(.regular)
+                    .padding()
+                }
+                .navigationTitle("Switch")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            viewStore.send(.toggleConfigurePresenterd)
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                                .tint(Color(.systemGray))
+                        }
+                    }
+                }
+                .sheet(
+                    isPresented: viewStore.binding(
+                        get: { $0.isConfigPresented },
+                        send: { .toggleConfigurePresenterd}()
+                    ), content: {
+                        ConfigView()
+                    }
+                )
             }
-            .padding()
         }
     }
 }
 
 private extension ChatListView {
-    func addMessage(text: String, scrollViewProxy: ScrollViewProxy) {
-        withAnimation(.spring) {
-            state.addMessage(text: text)
-            // iOS17~/macOS14〜ではwithAnimationのcompletionを使用する
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                scrollToBottom(scrollViewProxy: scrollViewProxy)
-            }
-        }
-    }
-
-    func scrollToBottom(scrollViewProxy: ScrollViewProxy) {
+    func scrollToBottom(id: String, scrollViewProxy: ScrollViewProxy) {
         withAnimation {
-            scrollViewProxy.scrollTo(state.messages.last?.id ?? "")
+            scrollViewProxy.scrollTo(id)
             print("Did complete messages animation")
         }
     }
 }
 
 #Preview {
-    ChatListView()
+    ChatListView(store: .init(initialState: .init(), reducer: {
+        Feature()
+    }))
 }

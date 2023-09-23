@@ -15,11 +15,22 @@
 		C35817652AAF1B3A00428704 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35817642AAF1B3A00428704 /* Preview Assets.xcassets */; };
 		C39A4ABF2AAF2DF100C558C3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */; };
 		C39A4AC22AAF32EB00C558C3 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */; };
+		C3D5C0602ABDE25100530AA2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C05F2ABDE25100530AA2 /* Device.swift */; };
+		C3D5C0632ABDE59100530AA2 /* MCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0622ABDE59100530AA2 /* MCMode.swift */; };
+		C3D5C0662ABDE62600530AA2 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0652ABDE62600530AA2 /* ConfigView.swift */; };
+		C3D5C0692ABDEADC00530AA2 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0682ABDEADC00530AA2 /* ConnectionCheck.swift */; };
+		C3D5C06C2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C06B2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift */; };
+		C3D5C06F2ABE6BC600530AA2 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C06E2ABE6BC600530AA2 /* AppState.swift */; };
+		C3D5C0712ABE6BF800530AA2 /* MultipeerConnectivityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0702ABE6BF800530AA2 /* MultipeerConnectivityState.swift */; };
+		C3D5C0742ABE6EA300530AA2 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0732ABE6EA300530AA2 /* Reducer.swift */; };
 		C3DA95DF2AB0C52D00E043FF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = C3DA95DE2AB0C52D00E043FF /* ComposableArchitecture */; };
 		C3EB8E792AB84692006EB664 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E782AB84692006EB664 /* String.swift */; };
 		C3EB8E7C2AB84967006EB664 /* ReadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E7B2AB84967006EB664 /* ReadingStatus.swift */; };
 		C3EB8E7F2AB87DB4006EB664 /* ChartListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E7E2AB87DB4006EB664 /* ChartListState.swift */; };
 		C3EB8E812AB880FF006EB664 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E802AB880FF006EB664 /* Sequence.swift */; };
+		C3EB8E832AB89897006EB664 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E822AB89897006EB664 /* MCManager.swift */; };
+		C3EB8E872AB89FE7006EB664 /* MCBrowserViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E862AB89FE7006EB664 /* MCBrowserViewControllerWrapper.swift */; };
+		C3EB8E892AB8A37C006EB664 /* MultipeerConnectivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E882AB8A37C006EB664 /* MultipeerConnectivityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +44,22 @@
 		C35817642AAF1B3A00428704 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		C3D5C05F2ABDE25100530AA2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		C3D5C0622ABDE59100530AA2 /* MCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCMode.swift; sourceTree = "<group>"; };
+		C3D5C0652ABDE62600530AA2 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		C3D5C0682ABDEADC00530AA2 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
+		C3D5C06B2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityClient.swift; sourceTree = "<group>"; };
+		C3D5C06E2ABE6BC600530AA2 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		C3D5C0702ABE6BF800530AA2 /* MultipeerConnectivityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityState.swift; sourceTree = "<group>"; };
+		C3D5C0732ABE6EA300530AA2 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		C3EB8E782AB84692006EB664 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3EB8E7B2AB84967006EB664 /* ReadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingStatus.swift; sourceTree = "<group>"; };
 		C3EB8E7E2AB87DB4006EB664 /* ChartListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartListState.swift; sourceTree = "<group>"; };
 		C3EB8E802AB880FF006EB664 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		C3EB8E822AB89897006EB664 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		C3EB8E842AB899D5006EB664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C3EB8E862AB89FE7006EB664 /* MCBrowserViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCBrowserViewControllerWrapper.swift; sourceTree = "<group>"; };
+		C3EB8E882AB8A37C006EB664 /* MultipeerConnectivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */,
+				C3EB8E822AB89897006EB664 /* MCManager.swift */,
+				C3D5C05F2ABDE25100530AA2 /* Device.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -95,6 +120,11 @@
 		C358175B2AAF1B3A00428704 /* Switch */ = {
 			isa = PBXGroup;
 			children = (
+				C3D5C0722ABE6E9800530AA2 /* Reducer */,
+				C3D5C06D2ABE6BBD00530AA2 /* State */,
+				C3D5C06A2ABE698100530AA2 /* Dependencies */,
+				C3D5C0612ABDE58800530AA2 /* Constants */,
+				C3EB8E842AB899D5006EB664 /* Info.plist */,
 				C32F52552AB84248009AE7C6 /* Model */,
 				C32F52522AB83ECB009AE7C6 /* Utils */,
 				C38253A92AAF6C0E00783A60 /* Extensions */,
@@ -137,9 +167,61 @@
 		C39A4AC02AAF32DE00C558C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3D5C0642ABDE61500530AA2 /* Config */,
+				C3EB8E852AB89FD5006EB664 /* MultipeerConnectivity */,
 				C3EB8E7D2AB87DA8006EB664 /* ChatListView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C3D5C0612ABDE58800530AA2 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C0622ABDE59100530AA2 /* MCMode.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		C3D5C0642ABDE61500530AA2 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C0672ABDEACA00530AA2 /* ConnectionCheck */,
+				C3D5C0652ABDE62600530AA2 /* ConfigView.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C3D5C0672ABDEACA00530AA2 /* ConnectionCheck */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C0682ABDEADC00530AA2 /* ConnectionCheck.swift */,
+			);
+			path = ConnectionCheck;
+			sourceTree = "<group>";
+		};
+		C3D5C06A2ABE698100530AA2 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C06B2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		C3D5C06D2ABE6BBD00530AA2 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C06E2ABE6BC600530AA2 /* AppState.swift */,
+				C3D5C0702ABE6BF800530AA2 /* MultipeerConnectivityState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		C3D5C0722ABE6E9800530AA2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				C3D5C0732ABE6EA300530AA2 /* Reducer.swift */,
+			);
+			path = Reducer;
 			sourceTree = "<group>";
 		};
 		C3EB8E7A2AB8495B006EB664 /* Contants */ = {
@@ -157,6 +239,15 @@
 				C3EB8E7E2AB87DB4006EB664 /* ChartListState.swift */,
 			);
 			path = ChatListView;
+			sourceTree = "<group>";
+		};
+		C3EB8E852AB89FD5006EB664 /* MultipeerConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				C3EB8E862AB89FE7006EB664 /* MCBrowserViewControllerWrapper.swift */,
+				C3EB8E882AB8A37C006EB664 /* MultipeerConnectivityView.swift */,
+			);
+			path = MultipeerConnectivity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,12 +330,23 @@
 				C32F52542AB83EDE009AE7C6 /* TextReaderManager.swift in Sources */,
 				C39A4ABF2AAF2DF100C558C3 /* ChatBubbleView.swift in Sources */,
 				C358175F2AAF1B3A00428704 /* ContentView.swift in Sources */,
+				C3EB8E832AB89897006EB664 /* MCManager.swift in Sources */,
 				C3EB8E7C2AB84967006EB664 /* ReadingStatus.swift in Sources */,
 				C3EB8E792AB84692006EB664 /* String.swift in Sources */,
 				C3EB8E7F2AB87DB4006EB664 /* ChartListState.swift in Sources */,
+				C3D5C0632ABDE59100530AA2 /* MCMode.swift in Sources */,
+				C3D5C06C2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift in Sources */,
+				C3EB8E892AB8A37C006EB664 /* MultipeerConnectivityView.swift in Sources */,
+				C3D5C0742ABE6EA300530AA2 /* Reducer.swift in Sources */,
+				C3D5C0602ABDE25100530AA2 /* Device.swift in Sources */,
+				C3D5C0712ABE6BF800530AA2 /* MultipeerConnectivityState.swift in Sources */,
 				C32F52582AB84258009AE7C6 /* Error.swift in Sources */,
+				C3D5C0692ABDEADC00530AA2 /* ConnectionCheck.swift in Sources */,
+				C3D5C06F2ABE6BC600530AA2 /* AppState.swift in Sources */,
+				C3D5C0662ABDE62600530AA2 /* ConfigView.swift in Sources */,
 				C3EB8E812AB880FF006EB664 /* Sequence.swift in Sources */,
 				C358175D2AAF1B3A00428704 /* SwitchApp.swift in Sources */,
+				C3EB8E872AB89FE7006EB664 /* MCBrowserViewControllerWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +479,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Switch/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "テキストの通信処理に利用します";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -415,6 +519,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Switch/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "テキストの通信処理に利用します";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

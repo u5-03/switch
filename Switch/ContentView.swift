@@ -9,13 +9,16 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    
+    @State private var isConfigPresented = false
 
     init() {
+
     }
 
     var body: some View {
-        ChatListView()
+        ChatListView(store: .init(initialState: .init(), reducer: {
+            Feature()
+        }))
     }
 }
 
