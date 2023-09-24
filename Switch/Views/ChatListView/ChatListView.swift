@@ -18,19 +18,19 @@ struct ChatListView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ScrollView {
                 VStack(spacing: 8) {
-                    ForEach(viewStore.messages) { messageItem in
+                    ForEach(viewStore.messages) { type in
                         HStack {
                             ChatBubbleView(
-                                item: messageItem,
+                                type: type,
                                 mirrored: true
                             )
                             .onTapGesture {
                                 Task {
-                                    switch messageItem.readingStatus {
+                                    switch type.messageItem.readingStatus {
                                     case .readingError:
-                                        viewStore.send(.readErrorMessage(messageItem: messageItem))
+                                        viewStore.send(.readErrorMessage(messageItem: type.messageItem))
                                     case .willRead:
-                                        viewStore.send(.deleteMessage(messageItem: messageItem))
+                                        viewStore.send(.didTapMessageDeleteButton(messageItem: type.messageItem))
                                     default:
                                         break
                                     }
@@ -38,24 +38,9 @@ struct ChatListView: View {
                             }
                             Spacer()
                         }
-                        .id(messageItem.id)
+                        .id(type.messageItem.id)
                         .transition(.opacity)
-                        //                    .transition(
-                        //                        AnyTransition.asymmetric(
-                        //                            insertion: AnyTransition.slide.combined(with: AnyTransition.opacity),
-                        //                            removal: AnyTransition.slide.combined(with: AnyTransition.opacity)
-                        //                        )
-                        //                    )
                     }
-                    // Ref: https://www.hackingwithswift.com/forums/swiftui/scrollviewproxy-scrollto-seems-to-be-broken-on-ios-16/16318/18295
-                    //                .id(listID)
-                    //                .id(UUID())
-                    //                .onAppear {
-                    //                    UITableView.appearance().separatorStyle = .none
-                    //                }
-                    //                .onChange(of: state.messages, initial: true) {
-                    //                    //                    scrollToBottom(scrollViewProxy: scrollViewProxy)
-                    //                }
                     Spacer()
                         .frame(height: 16)
                 }
@@ -71,18 +56,18 @@ struct ChatListView: View {
                     // Listを使うと、insertのアニメーションとscrollToBottomのアニメーションがうまく動かない
                     scrollView
                     HStack {
-                        TextField("Enter text", text: viewStore.binding(get: { state in
-                            state.newMessage
-                        }, send: Feature.Action.textChanged), axis: .vertical)
-                        .submitLabel(.send)
-                        .textFieldStyle(.roundedBorder)
+                        TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged), axis: .vertical)
+                            // これがないと、最初の日本語文字入力時に、確定状態になる
+                            .disableAutocorrection(true)
+                            .submitLabel(.send)
+                            .textFieldStyle(.roundedBorder)
                         Button(action: {
                             if !viewStore.newMessage.trimmed().isEmpty {
                                 withAnimation(.spring) {
-                                    viewStore.send(.addMessage(text: viewStore.newMessage.trimmed()))
+                                    viewStore.send(.didTapSendButton)
                                     // iOS17~/macOS14〜ではwithAnimationのcompletionを使用する
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        scrollToBottom(id: viewStore.messages.last?.id ?? "", scrollViewProxy: scrollViewProxy)
+                                        scrollToBottom(id: viewStore.messages.last?.messageItem.id ?? "", scrollViewProxy: scrollViewProxy)
                                     }
                                 }
 
@@ -104,7 +89,7 @@ struct ChatListView: View {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
-                            viewStore.send(.toggleConfigurePresenterd)
+                            viewStore.send(.didTapConfigButton)
                         } label: {
                             Image(systemName: "gearshape.fill")
                                 .tint(Color(.systemGray))
@@ -114,11 +99,12 @@ struct ChatListView: View {
                 .sheet(
                     isPresented: viewStore.binding(
                         get: { $0.isConfigPresented },
-                        send: { .toggleConfigurePresenterd}()
+                        send: { .toggleConfigButtonPresented}()
                     ), content: {
-                        ConfigView()
+                        ConfigView(store: store)
                     }
                 )
+                .task { await viewStore.send(.task).finish() }
             }
         }
     }

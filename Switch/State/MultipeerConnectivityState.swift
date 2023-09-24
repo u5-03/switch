@@ -7,88 +7,79 @@
 
 import Foundation
 import MultipeerConnectivity
+import ComposableArchitecture
 
-struct DeviceInfo: Identifiable {
+struct PeerInfo: Identifiable, Equatable {
     let id = UUID().uuidString
-    let deviceName: String
+    let peerId: MCPeerID
 }
 
-final class MultipeerConnectivityState: NSObject {
-    let peerID: MCPeerID
-    let mcSession: MCSession
-    let advertiser: MCNearbyServiceAdvertiser
-    let serviceType = "switch-app"
+enum MultipeerConnectivityDelegateAction: Equatable {
+    case sessionDidChanaged(peerID: MCPeerID, state: MCSessionState)
+    case sessionDidReceived(data: Data, peerID: MCPeerID)
+    case advertiserDidReceiveInvitationFromPeer(peerID: MCPeerID, context: Data?, invitationHandler: (Bool, MCSession?) -> Void)
+    case browserFound(browser: MCNearbyServiceBrowser, foundPeerId: MCPeerID, info: [String : String]?)
+    case browserLost(browser: MCNearbyServiceBrowser, lostPeerId: MCPeerID)
 
-    var connectedDevices: [DeviceInfo] {
-        return mcSession.connectedPeers
-            .map { DeviceInfo(deviceName: $0.displayName) }
-    }
-
-    private override init() {
-        peerID = MCPeerID(displayName: Device.marketingName ?? Device.name)
-        mcSession = MCSession(peer: peerID)
-        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
-        super.init()
-
-        mcSession.delegate = self
-        advertiser.delegate = self
-    }
-}
-
-extension MultipeerConnectivityState {
-
-}
-
-
-extension MultipeerConnectivityState: MCSessionDelegate {
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        let message: String
-        switch state {
-        case .connected:
-            message = "\(peerID.displayName)が接続されました"
-        case .connecting:
-            message = "\(peerID.displayName)が接続中です"
-        case .notConnected:
-            message = "\(peerID.displayName)が切断されました"
-        @unknown default:
-            message = "\(peerID.displayName)が想定外の状態です"
+    static func == (lhs: MultipeerConnectivityDelegateAction, rhs: MultipeerConnectivityDelegateAction) -> Bool {
+        switch (lhs, rhs) {
+        case let (.sessionDidChanaged(peerID1, state1), .sessionDidChanaged(peerID2, state2)):
+            return peerID1 == peerID2 && state1 == state2
+        case let (.sessionDidReceived(data1, peerID1), .sessionDidReceived(data2, peerID2)):
+            return data1 == data2 && peerID1 == peerID2
+        case let (.advertiserDidReceiveInvitationFromPeer(peerID1, context1, _), .advertiserDidReceiveInvitationFromPeer(peerID2, context2, _)):
+            return peerID1 == peerID2 && context1 == context2
+        case let (.browserFound(browser1, foundPeerId1, info1), .browserFound(browser2, foundPeerId2, info2)):
+            return browser1 == browser2 && foundPeerId1 == foundPeerId2 && info1 == info2
+        case let (.browserLost(browser1, lostPeerId1), .browserLost(browser2, lostPeerId2)):
+            return browser1 == browser2 && lostPeerId1 == lostPeerId2
+        default:
+            return false
         }
-        print("session: didChange, \(message)")
-    }
-
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("session: didReceive, \(peerID.displayName)")
-    }
-
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-
-        print("session: didReceive stream, \(peerID.displayName)")
-    }
-
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-
-        print("session: didStartReceivingResourceWithName, \(peerID.displayName)")
-    }
-
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        print("session: didFinishReceivingResourceWithName, \(peerID.displayName)")
     }
 }
 
-extension MultipeerConnectivityState: MCNearbyServiceAdvertiserDelegate {
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, mcSession)
+//struct AlertAndSheetState: Equatable {
+//    var actionSheet: ActionSheetState<ConfigAction.AdvertiserInvitationAlertAction>?
+//  var alert: AlertState<ConfigAction>?
+//  var count = 0
+//}
+
+enum ConfigAction: Equatable {
+    case didTapAdvertisingPeerButton
+    case switchHostMode
+    case didCloseBrowserView
+    case setSheet(isPresented: Bool)
+//    case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
+    case mcBrowserSheet(action: PresentationAction<ConfigAction.BrowserViewAction>)
+    case advertiserInvitationAlertAction(action: AdvertiserInvitationAlertAction)
+
+    enum AdvertiserInvitationAlertAction: Equatable {
+        case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
+        case didTapAdvertiserInvitationCancelButton(info: AdvertiserInvitationInfo)
+    }
+
+    enum BrowserViewAction: Equatable {
+        case tap
     }
 }
 
-extension MultipeerConnectivityState: MCNearbyServiceBrowserDelegate {
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        print("Will invite peer: \(peerID.displayName)")
-        browser.invitePeer(peerID, to: mcSession, withContext: nil, timeout: 0)
-    }
+struct MultipeerConnectivityState: Equatable {
+    var connectedPeerInfos: [PeerInfo] = []
+    var connectionCandidatePeerInfos: [PeerInfo] = []
+    var isStartAdvertisingPeer = false
+    var shouldShowAdvertiserInvitationAlert = false
+    var userMode: MCMode = .host
+//    var isBrowserViewPresented = false
+//    @PresentationState var advertiserInvitationAlertState: AlertState<Feature.Action>?
+    @PresentationState var browserViewPresentationState: MultipeerConnectivityState?
 
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-
+    static func == (lhs: MultipeerConnectivityState, rhs: MultipeerConnectivityState) -> Bool {
+        return lhs.connectedPeerInfos == rhs.connectedPeerInfos &&
+        lhs.connectionCandidatePeerInfos == rhs.connectionCandidatePeerInfos &&
+        lhs.isStartAdvertisingPeer == rhs.isStartAdvertisingPeer &&
+        lhs.shouldShowAdvertiserInvitationAlert == rhs.shouldShowAdvertiserInvitationAlert &&
+//        lhs.advertiserInvitationAlertState == rhs.advertiserInvitationAlertState &&
+        lhs.userMode == rhs.userMode
     }
 }
-

@@ -8,20 +8,20 @@
 import SwiftUI
 
 enum MCMode {
-    case sender
-    case receiver
+    case host
+    case guest
 
     var displayName: String {
         switch self {
-        case .sender: return "送信モード"
-        case .receiver: return "受信モード"
+        case .host: return "ホストモード"
+        case .guest: return "参加者モード"
         }
     }
 
     var configColor: Color {
         switch self {
-        case .sender: return .red
-        case .receiver: return .blue
+        case .host: return .red
+        case .guest: return .blue
         }
     }
 }

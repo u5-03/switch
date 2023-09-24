@@ -18,6 +18,7 @@ struct ContentView: View {
     var body: some View {
         ChatListView(store: .init(initialState: .init(), reducer: {
             Feature()
+                .dependency(\.multipeerConnectivityClient, .liveValue)
         }))
     }
 }

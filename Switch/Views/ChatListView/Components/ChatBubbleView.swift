@@ -17,8 +17,8 @@ private struct BalloonShapeView: View {
         GeometryReader { geometry in
             Path { path in
                 let tailSize = CGSize(
-                    width: cornerRadius / 2,
-                    height: cornerRadius / 2)
+                    width: cornerRadius,
+                    height: cornerRadius)
                 let shapeRect = CGRect(
                     x: 0,
                     y: 0,
@@ -82,47 +82,50 @@ private struct BalloonShapeView: View {
                     endAngle: Angle(degrees: 180), clockwise: false)
             }
             .fill(self.color)
-            .rotation3DEffect(.degrees(mirrored ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+//            .rotation3DEffect(.degrees(mirrored ? 180 : 0), axis: (x: 0, y: 1, z: 0))
         }
     }
 }
 
 struct ChatBubbleView: View {
-    let item: MessageItem
+    let type: MessageCreaterType
     let mirrored: Bool
     let cornerRadius = 8.0
     let horizontalSpacingMargin: CGFloat = 12
     let iconLength = CGFloat(12)
 
+    @ViewBuilder
+    var statusIconView: some View {
+        switch type.messageItem.readingStatus {
+        case .reading:
+            Image(systemName: "ellipsis")
+                .symbolEffect(.variableColor.cumulative, options: .speed(10))
+            // Ref: https://www.hackingwithswift.com/quick-start/swiftui/how-to-animate-sf-symbols
+        case .readCompleted:
+            Image(systemName: "checkmark")
+                .foregroundStyle(type.messageItem.readingStatus.color)
+        case .willRead:
+            Image(systemName: "trash.fill")
+                .foregroundStyle(type.messageItem.readingStatus.color)
+        case .readingError:
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(type.messageItem.readingStatus.color)
+        }
+    }
+
     var body: some View {
         HStack(alignment: .bottom, spacing: 8) {
-            Text(item.message)
+            Text(type.messageItem.message)
                 .padding(.leading, horizontalSpacingMargin + (mirrored ? cornerRadius / 2 : 0))
                 .padding(.trailing, horizontalSpacingMargin + (!mirrored ? cornerRadius / 2 : 0))
                 .padding(.vertical, 4)
                 .background(BalloonShapeView(
                     cornerRadius: cornerRadius,
-                    color: item.readingStatus.color,
-                    mirrored: mirrored)
+                    color: type.messageItem.readingStatus.color,
+                    mirrored: !type.isMe)
                 )
-            Group {
-                switch item.readingStatus {
-                case .reading:
-                    Image(systemName: "ellipsis")
-                    // Ref: https://www.hackingwithswift.com/quick-start/swiftui/how-to-animate-sf-symbols
-                        .symbolEffect(.variableColor.cumulative, options: .speed(10))
-                case .readCompleted:
-                    Image(systemName: "checkmark")
-                        .foregroundStyle(item.readingStatus.color)
-                case .willRead:
-                    Image(systemName: "trash.fill")
-                        .foregroundStyle(item.readingStatus.color)
-                case .readingError:
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(item.readingStatus.color)
-                }
-            }
-            .frame(width: iconLength, height: iconLength)
+            statusIconView
+                .frame(width: iconLength, height: iconLength)
         }
     }
 }
@@ -130,36 +133,40 @@ struct ChatBubbleView: View {
 #Preview {
     VStack(alignment: .leading, spacing: 0) {
         ChatBubbleView(
-            item: .init(
+            type: .me(messageItem: .init(
                 message: "willRead " + .random,
                 date: Date(),
+                displayUserName: "DisplayName",
                 readingStatus: .willRead
-            ),
+            )),
             mirrored: true
         )
         ChatBubbleView(
-            item: .init(
+            type: .me(messageItem: .init(
                 message: "reading " + .random,
                 date: Date(),
+                displayUserName: "DisplayName",
                 readingStatus: .reading
-            ),
+            )),
             mirrored: true
         )
         ChatBubbleView(
-            item: .init(
+            type: .me(messageItem: .init(
                 message: "readCompleted " + .random,
                 date: Date(),
+                displayUserName: "DisplayName",
                 readingStatus: .readCompleted
-            ),
+            )),
             mirrored: true
         )
         ChatBubbleView(
-            item: .init(
+            type: .other(messageItem: .init(
                 message: "readingError " + .random,
                 date: Date(),
+                displayUserName: "OtherDisplayName",
                 readingStatus: .readingError
-            ),
-            mirrored: true
+            )),
+            mirrored: false
         )
     }
 }
