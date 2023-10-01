@@ -31,6 +31,13 @@ enum MessageCreaterType: Equatable, Identifiable, Hashable {
         case .other: return false
         }
     }
+
+    var isOther: Bool {
+        switch self {
+        case .me: return false
+        case .other: return true
+        }
+    }
 }
 
 enum CancelID: Int {
@@ -62,10 +69,18 @@ struct Feature: Reducer {
     struct AppState: Equatable {
         var isConfigPresented = false
         var newMessage: String = ""
-        var messages: [MessageCreaterType] = []
+        fileprivate var messages: [MessageCreaterType] = []
         var mcState = MultipeerConnectivityState()
         @PresentationState var advertiserInvitationAlertState: AlertState<ConfigAction.AdvertiserInvitationAlertAction>?
         var isMcBrowserSheetPresented = false
+        var scrollToRowId: String?
+        var adjustedMessages: [MessageCreaterType] {
+            if mcState.isReceiveMessageDisplayOnlyMode {
+                return messages.filter(\.isOther)
+            } else {
+                return messages
+            }
+        }
 
         static func == (lhs: Feature.AppState, rhs: Feature.AppState) -> Bool {
             return lhs.isConfigPresented == rhs.isConfigPresented &&
@@ -93,16 +108,20 @@ struct Feature: Reducer {
         case mcAction(action: MultipeerConnectivityDelegateAction)
         case configAction(action: ConfigAction)
         case task
+        case willScrollToBottom
+        case didScrollToBottom
 
         case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
-//        case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
     }
 
     var body: some Reducer<Feature.AppState, Feature.Action> {
         Reduce { state, action in
             switch action {
-            case .didTapConfigButton, .toggleConfigButtonPresented:
-                state.isConfigPresented.toggle()
+            case .didTapConfigButton:
+                state.isConfigPresented = true
+                return .none
+            case .toggleConfigButtonPresented:
+                state.isConfigPresented = false
                 return .none
             case .didTapSendButton:
                 let message = state.newMessage.trimmed()
@@ -115,9 +134,16 @@ struct Feature: Reducer {
                     ))
                 )
                 state.newMessage = ""
-                return .run { send in
-                    MCManager.shared.sendMessage(text: message)
-                    await send(.readMessage)
+                MCManager.shared.sendMessage(text: message)
+                if state.mcState.isReadTextEnable {
+                    return .run { send in
+                        await send(.readMessage)
+                    }
+                } else {
+                    return updateMessageItem(
+                        index: state.messages.count - 1,
+                        readingStatus: .readCompleted,
+                        state: &state)
                 }
             case .didTapMessageDeleteButton(let messageItem):
                 state.messages.removeAll(where: { $0.messageItem.id == messageItem.id })
@@ -127,10 +153,7 @@ struct Feature: Reducer {
             case .readMessage:
                 return readText(state: &state)
             case .textChanged(let text):
-                if !text.isEmpty || state.newMessage != text {
-                    state.newMessage = text
-                    print("Text: changed \(text)")
-                }
+                state.newMessage = text
                 return .none
             case .clearNewText:
                 state.newMessage = ""
@@ -158,6 +181,15 @@ struct Feature: Reducer {
                         }
                     }
                 }
+            case .willScrollToBottom:
+                if let messageId = state.adjustedMessages
+                    .first(where: { $0.messageItem.readingStatus.isReading })?.messageItem.id {
+                    state.scrollToRowId = messageId
+                } else {
+                    state.scrollToRowId = state.adjustedMessages.last?.messageItem.id
+                }
+            case .didScrollToBottom:
+                state.scrollToRowId = nil
             case .advertiserInvitationAlert(let alertAction):
                 switch alertAction {
                 case .dismiss:
@@ -180,6 +212,22 @@ struct Feature: Reducer {
                     guard let message = String(data: data, encoding: .utf8) else { return .none }
                     let messageItem = MessageItem(message: message, date: Date(), displayUserName: peerID.displayName, readingStatus: .willRead)
                     state.messages.append(.other(messageItem: messageItem))
+                    let effect: Effect<Feature.Action> = {
+                        if state.mcState.isGuestReadTextEnable {
+                            return .send(.readMessage)
+                        } else {
+                            return updateMessageItem(
+                                index: state.messages.count - 1,
+                                readingStatus: .readCompleted,
+                                state: &state
+                            )
+                        }
+                    }()
+                    return .concatenate(
+                        Effect<Feature.Action>.send(.willScrollToBottom),
+                        effect
+                    )
+
                 case .advertiserDidReceiveInvitationFromPeer(let peerID, _, let invitationHandler):
                     let info = AdvertiserInvitationInfo(peerId: peerID, invitationHandler: invitationHandler)
                     state.advertiserInvitationAlertState = .init(
@@ -257,8 +305,17 @@ struct Feature: Reducer {
                 case .setSheet(isPresented: let isPresented):
                     state.isMcBrowserSheetPresented = isPresented
                     return .none
+                case .toggleReadTextEnable:
+                    state.mcState.isReadTextEnable.toggle()
+                case .toggleGuestReadTextEnable:
+                    state.mcState.isGuestReadTextEnable.toggle()
+                case .toggleReceiveMessageDisplayOnlyMode:
+                    state.mcState.isReceiveMessageDisplayOnlyMode.toggle()
+                case .didChangedUserDisplayNameText(let text):
+                    state.mcState.userDisplayName = text
                 }
             }
+            return .none
         }
         .ifLet(\.$advertiserInvitationAlertState, action: /Feature.Action.advertiserInvitationAlert)
     }
@@ -269,19 +326,31 @@ private extension Reducer {
         guard !state.messages.contains(where: { $0.messageItem.readingStatus == .reading }),
               let willReadMessageItem = state.messages.sorted(by: \.messageItem.date)
             .first(where: { $0.messageItem.readingStatus == .willRead }),
-              let index = state.messages.firstIndex(where: { $0.messageItem.id == willReadMessageItem.messageItem.id }) else { return .none }
-        let messageItem = state.messages[index].messageItem
-        return .concatenate(
-            updateMessageItem(index: index, readingStatus: .reading, state: &state),
-            .run { send in
-                do {
-                    try await TextReaderManager.shared.read(text: messageItem.message)
-                    return await send(.didCompleteReading(index: index))
-                } catch {
-                    return await send(.didErrorReading(index: index))
+              let index = state.messages
+            .firstIndex(where: { $0.messageItem.id == willReadMessageItem.messageItem.id }) else { return .none }
+        let messageType = state.messages[index]
+        let messageItem = messageType.messageItem
+        let shouldRead = switch messageType {
+        case .me:
+            state.mcState.isReadTextEnable
+        case .other:
+            state.mcState.isGuestReadTextEnable
+        }
+        if shouldRead {
+            return .concatenate(
+                updateMessageItem(index: index, readingStatus: .reading, state: &state),
+                .run { send in
+                    do {
+                        try await TextReaderManager.shared.read(text: messageItem.message)
+                        return await send(.didCompleteReading(index: index))
+                    } catch {
+                        return await send(.didErrorReading(index: index))
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            return updateMessageItem(index: index, readingStatus: .readCompleted, state: &state)
+        }
     }
 
     func readErrorText(messageItem: MessageItem, state: inout Feature.AppState) -> Effect<Feature.Action> {
@@ -301,7 +370,8 @@ private extension Reducer {
 
     func updateMessageItem(index: Int, readingStatus: ReadingStatus, state: inout Feature.AppState) -> Effect<Feature.Action> {
         if state.messages.count <= index { return .none }
-        let messageItem = state.messages[index].messageItem
+        let messageType = state.messages[index]
+        let messageItem = messageType.messageItem
         let newMessageItem = MessageItem(
             message: messageItem.message,
             date: messageItem.date,
@@ -309,7 +379,11 @@ private extension Reducer {
             readingStatus: readingStatus
         )
         withAnimation {
-            state.messages[index] = .me(messageItem: newMessageItem)
+            if messageType.isMe {
+                state.messages[index] = .me(messageItem: newMessageItem)
+            } else {
+                state.messages[index] = .other(messageItem: newMessageItem)
+            }
         }
         return .none
     }

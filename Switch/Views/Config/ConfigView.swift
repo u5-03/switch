@@ -13,8 +13,7 @@ enum NavigationType {
 }
 
 struct ConfigView: View {
-    //    @State private var isSenderEnable = true
-    //    @State private var isBrowserViewPresented = false
+    @Environment(\.dismiss) private var dismiss
     private let myPeerID = MCManager.shared.peerID
     private let session = MCManager.shared.mcSession
     private let sessionType = MCManager.shared.serviceType
@@ -72,13 +71,43 @@ struct ConfigView: View {
                             }
                         }
                     }
+                    Section("アプリ設定") {
+                        Toggle(isOn: viewStore.binding { state in
+                            state.mcState.isReadTextEnable
+                        } send: { value in
+                                .configAction(action: .toggleReadTextEnable)
+                        }, label: {
+                            Text("文字の読み上げ")
+                        })
+                        Toggle(isOn: viewStore.binding { state in
+                            state.mcState.isGuestReadTextEnable
+                        } send: { value in
+                                .configAction(action: .toggleGuestReadTextEnable)
+                        }, label: {
+                            Text("相手の文字の読み上げ")
+                        })
+                        Toggle(isOn: viewStore.binding { state in
+                            state.mcState.isReceiveMessageDisplayOnlyMode
+                        } send: { value in
+                                .configAction(action: .toggleReceiveMessageDisplayOnlyMode)
+                        }, label: {
+                            Text("相手の文字のみ表示")
+                        })
+                        NavigationLink {
+                            EditUserDisplayNameView(store: store)
+                        } label: {
+                            LabeledContent("表示名") {
+                                Text(viewStore.mcState.userDisplayName)
+                            }
+                        }
+                    }
                     Section("情報") {
-                        LabeledContent("デバイス情報") {
+                        LabeledContent("デバイス名") {
                             Text(Device.marketingName ?? Device.name)
                         }
                     }
                 }
-                .fullScreenCover(
+                .sheet(
                     isPresented: viewStore.binding(
                         get: \.isMcBrowserSheetPresented,
                         send: { .configAction(action: .setSheet(isPresented: $0)) }
@@ -87,7 +116,15 @@ struct ConfigView: View {
                     NavigationStack {
                         MCBrowserViewControllerWrapper(serviceType: sessionType, peerID: myPeerID, session: session)
                             .navigationTitle("受信デバイスを探す")
-                            .navigationBarTitleDisplayMode(.inline)
+//                            .toolbar {
+//                                ToolbarItem {
+//                                    Button {
+//                                        dismiss()
+//                                    } label: {
+//                                        Text("閉じる")
+//                                    }
+//                                }
+//                            }
                     }
                 }
                 .alert(
@@ -98,14 +135,15 @@ struct ConfigView: View {
                         state
                     }, action: { $0 }
                 )
-
-                //                .alert(item: viewStore.mcState.$advertiserInvitationAlertState) { action in
-                //                      self.model.alertButtonTapped(action)
-                //                    }
-                //                .alert(store: store.scope(
-                //                    state: \.mcState.$advertiserInvitationAlertState,
-                //                    action: { .advertiserInvitationAlert(action: $0) })
-                //                )
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("閉じる")
+                        }
+                    }
+                }
                 .navigationTitle("設定")
             }
         }

@@ -26,4 +26,11 @@ enum ReadingStatus {
             return .red
         }
     }
+
+    var isReading: Bool {
+        switch self {
+        case .reading: return true
+        default: return false
+        }
+    }
 }

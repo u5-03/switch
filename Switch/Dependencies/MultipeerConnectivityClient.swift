@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
 struct MultipeerConnectivityClient: Sendable {
     public var delegate: @Sendable () async -> AsyncStream<MultipeerConnectivityDelegateAction>
@@ -22,6 +23,24 @@ struct MultipeerConnectivityClient: Sendable {
             let delegate = await task.value.delegate
             return AsyncStream<MultipeerConnectivityDelegateAction> { continuation in
                 delegate.registerContinuation(continuation)
+            }
+        }
+    }
+
+    static var mock: MultipeerConnectivityClient {
+        return MultipeerConnectivityClient { @MainActor in
+            return AsyncStream<MultipeerConnectivityDelegateAction> { continuation in
+                Task.detached {
+                    while true {
+                        // 1秒待機
+                        try! await Task.sleep(for: .seconds(1))
+
+                        // 値を流す
+                        let stringData = String.random.data(using: .utf8) ?? Data()
+                        let peerId = MCPeerID(displayName: .random(range: 1...10))
+                        continuation.yield(MultipeerConnectivityDelegateAction.sessionDidReceived(data: stringData, peerID: peerId))
+                    }
+                }
             }
         }
     }

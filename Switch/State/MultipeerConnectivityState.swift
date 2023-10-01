@@ -54,6 +54,11 @@ enum ConfigAction: Equatable {
     case mcBrowserSheet(action: PresentationAction<ConfigAction.BrowserViewAction>)
     case advertiserInvitationAlertAction(action: AdvertiserInvitationAlertAction)
 
+    case toggleReadTextEnable
+    case toggleGuestReadTextEnable
+    case toggleReceiveMessageDisplayOnlyMode
+    case didChangedUserDisplayNameText(name: String)
+
     enum AdvertiserInvitationAlertAction: Equatable {
         case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
         case didTapAdvertiserInvitationCancelButton(info: AdvertiserInvitationInfo)
@@ -70,16 +75,38 @@ struct MultipeerConnectivityState: Equatable {
     var isStartAdvertisingPeer = false
     var shouldShowAdvertiserInvitationAlert = false
     var userMode: MCMode = .host
+    var userDisplayName = "" {
+        didSet {
+            UserDefaults.standard.userDisplayName = userDisplayName
+            if !userDisplayName.isEmpty {
+                MCManager.shared.changePeerDisplayName(displayName: userDisplayName)
+            }
+        }
+    }
+    var isReadTextEnable = false {
+        didSet {
+            UserDefaults.standard.isReadTextEnable.toggle()
+        }
+    }
+    var isGuestReadTextEnable = false {
+        didSet {
+            UserDefaults.standard.isGuestReadTextEnable.toggle()
+        }
+    }
+    var isReceiveMessageDisplayOnlyMode = false {
+        didSet {
+            UserDefaults.standard.isReceiveMessageDisplayOnlyMode.toggle()
+        }
+    }
+
 //    var isBrowserViewPresented = false
 //    @PresentationState var advertiserInvitationAlertState: AlertState<Feature.Action>?
     @PresentationState var browserViewPresentationState: MultipeerConnectivityState?
 
-    static func == (lhs: MultipeerConnectivityState, rhs: MultipeerConnectivityState) -> Bool {
-        return lhs.connectedPeerInfos == rhs.connectedPeerInfos &&
-        lhs.connectionCandidatePeerInfos == rhs.connectionCandidatePeerInfos &&
-        lhs.isStartAdvertisingPeer == rhs.isStartAdvertisingPeer &&
-        lhs.shouldShowAdvertiserInvitationAlert == rhs.shouldShowAdvertiserInvitationAlert &&
-//        lhs.advertiserInvitationAlertState == rhs.advertiserInvitationAlertState &&
-        lhs.userMode == rhs.userMode
+    init() {
+        isReadTextEnable = UserDefaults.standard.isReadTextEnable
+        isGuestReadTextEnable = UserDefaults.standard.isGuestReadTextEnable
+        isReceiveMessageDisplayOnlyMode = UserDefaults.standard.isReceiveMessageDisplayOnlyMode
+        userDisplayName = UserDefaults.standard.userDisplayName
     }
 }

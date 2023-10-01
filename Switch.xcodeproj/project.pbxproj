@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		C32F52542AB83EDE009AE7C6 /* TextReaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */; };
 		C32F52582AB84258009AE7C6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52572AB84258009AE7C6 /* Error.swift */; };
+		C348C8D02AC9318C007C73FB /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348C8CF2AC9318C007C73FB /* PasteBoard.swift */; };
 		C358175D2AAF1B3A00428704 /* SwitchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358175C2AAF1B3A00428704 /* SwitchApp.swift */; };
 		C358175F2AAF1B3A00428704 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358175E2AAF1B3A00428704 /* ContentView.swift */; };
 		C35817612AAF1B3A00428704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35817602AAF1B3A00428704 /* Assets.xcassets */; };
 		C35817652AAF1B3A00428704 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35817642AAF1B3A00428704 /* Preview Assets.xcassets */; };
+		C388E8EB2AC4732200332D98 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C388E8EA2AC4732200332D98 /* UserDefaults.swift */; };
 		C39A4ABF2AAF2DF100C558C3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */; };
 		C39A4AC22AAF32EB00C558C3 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */; };
+		C3A564CE2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A564CD2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift */; };
+		C3A564D02AC7BCF10091BAC4 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A564CF2AC7BCF10091BAC4 /* Optional.swift */; };
 		C3D5C0602ABDE25100530AA2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C05F2ABDE25100530AA2 /* Device.swift */; };
 		C3D5C0632ABDE59100530AA2 /* MCMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0622ABDE59100530AA2 /* MCMode.swift */; };
 		C3D5C0662ABDE62600530AA2 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0652ABDE62600530AA2 /* ConfigView.swift */; };
@@ -24,6 +28,10 @@
 		C3D5C0742ABE6EA300530AA2 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0732ABE6EA300530AA2 /* Reducer.swift */; };
 		C3D5C0762ABEC80E00530AA2 /* MultipeerConnectivityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0752ABEC80E00530AA2 /* MultipeerConnectivityDelegate.swift */; };
 		C3D5C0812AC0822600530AA2 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0802AC0822600530AA2 /* Dependencies.swift */; };
+		C3D5C0832AC1DC4200530AA2 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0822AC1DC4200530AA2 /* DateFormatting.swift */; };
+		C3D5C0852AC1F92F00530AA2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0842AC1F92F00530AA2 /* Color.swift */; };
+		C3D5C0872AC1FB7100530AA2 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0862AC1FB7100530AA2 /* Contants.swift */; };
+		C3D5C0892AC1FE3400530AA2 /* BalloonShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D5C0882AC1FE3400530AA2 /* BalloonShapeView.swift */; };
 		C3DA95DF2AB0C52D00E043FF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = C3DA95DE2AB0C52D00E043FF /* ComposableArchitecture */; };
 		C3EB8E792AB84692006EB664 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E782AB84692006EB664 /* String.swift */; };
 		C3EB8E7C2AB84967006EB664 /* ReadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EB8E7B2AB84967006EB664 /* ReadingStatus.swift */; };
@@ -36,14 +44,18 @@
 /* Begin PBXFileReference section */
 		C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderManager.swift; sourceTree = "<group>"; };
 		C32F52572AB84258009AE7C6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		C348C8CF2AC9318C007C73FB /* PasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteBoard.swift; sourceTree = "<group>"; };
 		C35817592AAF1B3A00428704 /* Switch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Switch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C358175C2AAF1B3A00428704 /* SwitchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchApp.swift; sourceTree = "<group>"; };
 		C358175E2AAF1B3A00428704 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C35817602AAF1B3A00428704 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35817622AAF1B3A00428704 /* Switch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Switch.entitlements; sourceTree = "<group>"; };
 		C35817642AAF1B3A00428704 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C388E8EA2AC4732200332D98 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		C3A564CD2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDisplayNameView.swift; sourceTree = "<group>"; };
+		C3A564CF2AC7BCF10091BAC4 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		C3D5C05F2ABDE25100530AA2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		C3D5C0622ABDE59100530AA2 /* MCMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCMode.swift; sourceTree = "<group>"; };
 		C3D5C0652ABDE62600530AA2 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
@@ -53,6 +65,10 @@
 		C3D5C0732ABE6EA300530AA2 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		C3D5C0752ABEC80E00530AA2 /* MultipeerConnectivityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerConnectivityDelegate.swift; sourceTree = "<group>"; };
 		C3D5C0802AC0822600530AA2 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		C3D5C0822AC1DC4200530AA2 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
+		C3D5C0842AC1F92F00530AA2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C3D5C0862AC1FB7100530AA2 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		C3D5C0882AC1FE3400530AA2 /* BalloonShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonShapeView.swift; sourceTree = "<group>"; };
 		C3EB8E782AB84692006EB664 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3EB8E7B2AB84967006EB664 /* ReadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingStatus.swift; sourceTree = "<group>"; };
 		C3EB8E802AB880FF006EB664 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
@@ -80,6 +96,8 @@
 				C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */,
 				C3EB8E822AB89897006EB664 /* MCManager.swift */,
 				C3D5C05F2ABDE25100530AA2 /* Device.swift */,
+				C388E8EA2AC4732200332D98 /* UserDefaults.swift */,
+				C348C8CF2AC9318C007C73FB /* PasteBoard.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -151,14 +169,26 @@
 			children = (
 				C3EB8E782AB84692006EB664 /* String.swift */,
 				C3EB8E802AB880FF006EB664 /* Sequence.swift */,
+				C3D5C0822AC1DC4200530AA2 /* DateFormatting.swift */,
+				C3D5C0842AC1F92F00530AA2 /* Color.swift */,
+				C3A564CF2AC7BCF10091BAC4 /* Optional.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C388E8EC2AC489D600332D98 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C3A564CD2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C39A4ABD2AAF2DDC00C558C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */,
+				C3D5C0882AC1FE3400530AA2 /* BalloonShapeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -177,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D5C0622ABDE59100530AA2 /* MCMode.swift */,
+				C3D5C0862AC1FB7100530AA2 /* Contants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -184,6 +215,7 @@
 		C3D5C0642ABDE61500530AA2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				C388E8EC2AC489D600332D98 /* Components */,
 				C3D5C0672ABDEACA00530AA2 /* ConnectionCheck */,
 				C3D5C0652ABDE62600530AA2 /* ConfigView.swift */,
 			);
@@ -328,6 +360,10 @@
 			files = (
 				C3D5C0812AC0822600530AA2 /* Dependencies.swift in Sources */,
 				C39A4AC22AAF32EB00C558C3 /* ChatListView.swift in Sources */,
+				C3D5C0852AC1F92F00530AA2 /* Color.swift in Sources */,
+				C3A564D02AC7BCF10091BAC4 /* Optional.swift in Sources */,
+				C3D5C0832AC1DC4200530AA2 /* DateFormatting.swift in Sources */,
+				C388E8EB2AC4732200332D98 /* UserDefaults.swift in Sources */,
 				C32F52542AB83EDE009AE7C6 /* TextReaderManager.swift in Sources */,
 				C39A4ABF2AAF2DF100C558C3 /* ChatBubbleView.swift in Sources */,
 				C358175F2AAF1B3A00428704 /* ContentView.swift in Sources */,
@@ -335,10 +371,14 @@
 				C3EB8E7C2AB84967006EB664 /* ReadingStatus.swift in Sources */,
 				C3EB8E792AB84692006EB664 /* String.swift in Sources */,
 				C3D5C0632ABDE59100530AA2 /* MCMode.swift in Sources */,
+				C348C8D02AC9318C007C73FB /* PasteBoard.swift in Sources */,
+				C3D5C0872AC1FB7100530AA2 /* Contants.swift in Sources */,
+				C3D5C0892AC1FE3400530AA2 /* BalloonShapeView.swift in Sources */,
 				C3D5C06C2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift in Sources */,
 				C3EB8E892AB8A37C006EB664 /* MultipeerConnectivityView.swift in Sources */,
 				C3D5C0742ABE6EA300530AA2 /* Reducer.swift in Sources */,
 				C3D5C0762ABEC80E00530AA2 /* MultipeerConnectivityDelegate.swift in Sources */,
+				C3A564CE2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift in Sources */,
 				C3D5C0602ABDE25100530AA2 /* Device.swift in Sources */,
 				C3D5C0712ABE6BF800530AA2 /* MultipeerConnectivityState.swift in Sources */,
 				C32F52582AB84258009AE7C6 /* Error.swift in Sources */,
@@ -472,6 +512,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Switch/Switch.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Switch/Preview Content\"";
@@ -498,6 +539,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = switch.app.yugo.sugiyama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -512,6 +554,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Switch/Switch.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Switch/Preview Content\"";
@@ -538,6 +581,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = switch.app.yugo.sugiyama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;

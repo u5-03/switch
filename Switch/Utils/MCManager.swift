@@ -17,13 +17,14 @@ struct DeviceInfo: Identifiable {
 final class MCManager {
     static let shared = MCManager()
 
-    let peerID: MCPeerID
-    let mcSession: MCSession
+    private(set) var peerID: MCPeerID
+    private(set) var mcSession: MCSession
     let advertiser: MCNearbyServiceAdvertiser
     private(set) var stream: AsyncStream<MultipeerConnectivityDelegateAction>?
+//    private weak var delegate: MultipeerConnectivityDelegate?
+    private var peerDisplayId = ""
 
     let serviceType = "switch-app"
-//    var delegate: MultipeerConnectivityDelegate?
 
     var connectedDevices: [DeviceInfo] {
         return mcSession.connectedPeers
@@ -31,20 +32,22 @@ final class MCManager {
     }
 
     private init() {
-        peerID = MCPeerID(displayName: Device.marketingName ?? Device.name)
+        peerID = MCPeerID(displayName: UserDefaults.standard.userDisplayName)
         mcSession = MCSession(peer: peerID)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
-
-//        stream = AsyncStream<MultipeerConnectivityDelegateAction> { continuation in
-//            delegate = MultipeerConnectivityDelegate(actionHandler: { action in
-//                continuation.yield(action)
-//            })
-//        }
     }
 
     func setDelegate(delegate: MultipeerConnectivityDelegate) {
+//        self.delegate = delegate
         mcSession.delegate = delegate
         advertiser.delegate = delegate
+    }
+
+    func changePeerDisplayName(displayName: String) {
+        peerID = MCPeerID(displayName: displayName)
+        mcSession = MCSession(peer: peerID)
+//        guard let delegate else { return }
+//        setDelegate(delegate: delegate)
     }
 
     func presentDeviceBrowser() {

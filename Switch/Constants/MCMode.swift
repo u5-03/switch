@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MCMode {
+enum MCMode: Equatable {
     case host
     case guest
 

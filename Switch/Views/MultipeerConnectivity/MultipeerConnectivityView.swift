@@ -27,7 +27,7 @@ struct MultipeerConnectivityView: View {
             Button("Send Message") {
                 MCManager.shared.sendMessage(text: .random)
             }
-            .fullScreenCover(isPresented: $isBrowserViewPresented, content: {
+            .sheet(isPresented: $isBrowserViewPresented, content: {
                 MCBrowserViewControllerWrapper(serviceType: sessionType, peerID: myPeerID, session: session)
             })
         }

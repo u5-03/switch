@@ -9,16 +9,18 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State private var isConfigPresented = false
 
     init() {
-
+        if UserDefaults.standard.userDisplayName.isEmpty {
+            UserDefaults.standard.userDisplayName = Device.marketingName ?? Device.name
+        }
     }
 
     var body: some View {
         ChatListView(store: .init(initialState: .init(), reducer: {
             Feature()
                 .dependency(\.multipeerConnectivityClient, .liveValue)
+//                .dependency(\.multipeerConnectivityClient, .mock)
         }))
     }
 }

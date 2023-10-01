@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct SwitchApp: App {
-    @State private var newMessage = ""
     var body: some Scene {
         WindowGroup {
             ContentView()

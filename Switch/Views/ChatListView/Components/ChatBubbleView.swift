@@ -7,166 +7,173 @@
 
 import SwiftUI
 
-// Ref: https://qiita.com/yuppejp/items/92429a0fc8440f9da487
-private struct BalloonShapeView: View {
-    var cornerRadius: Double
-    var color: Color
-    var mirrored = false
-
-    var body: some View {
-        GeometryReader { geometry in
-            Path { path in
-                let tailSize = CGSize(
-                    width: cornerRadius,
-                    height: cornerRadius)
-                let shapeRect = CGRect(
-                    x: 0,
-                    y: 0,
-                    width: geometry.size.width,
-                    height: geometry.size.height)
-
-                // 時計まわりに描いていく
-
-                // 左上角丸
-                path.addArc(
-                    center: CGPoint(
-                        x: shapeRect.minX + cornerRadius,
-                        y: shapeRect.minY + cornerRadius),
-                    radius: cornerRadius,
-                    startAngle: Angle(degrees: 180),
-                    endAngle: Angle(degrees: 279), clockwise: false)
-
-                // 右上角丸
-                path.addArc(
-                    center: CGPoint(
-                        x: shapeRect.maxX - cornerRadius - tailSize.width,
-                        y: shapeRect.minY + cornerRadius),
-                    radius: cornerRadius,
-                    startAngle: Angle(degrees: 270),
-                    endAngle: Angle(degrees: 270 + 45), clockwise: false)
-
-                // しっぽ上部
-                path.addQuadCurve(
-                    to: CGPoint(
-                        x: shapeRect.maxX,
-                        y: shapeRect.minY),
-                    control: CGPoint(
-                        x: shapeRect.maxX - (tailSize.width / 2),
-                        y: shapeRect.minY))
-
-                // しっぽ下部
-                path.addQuadCurve(
-                    to: CGPoint(
-                        x: shapeRect.maxX - tailSize.width,
-                        y: shapeRect.minY + (cornerRadius / 2) + tailSize.height),
-                    control: CGPoint(
-                        x: shapeRect.maxX - (tailSize.width / 2),
-                        y: shapeRect.minY))
-
-                // 右下角丸
-                path.addArc(
-                    center: CGPoint(
-                        x: shapeRect.maxX - cornerRadius - tailSize.width,
-                        y: shapeRect.maxY - cornerRadius),
-                    radius: cornerRadius,
-                    startAngle: Angle(degrees: 0),
-                    endAngle: Angle(degrees: 90), clockwise: false)
-
-                // 左下角丸
-                path.addArc(
-                    center: CGPoint(
-                        x: shapeRect.minX + cornerRadius,
-                        y: shapeRect.maxY - cornerRadius),
-                    radius: cornerRadius,
-                    startAngle: Angle(degrees: 90),
-                    endAngle: Angle(degrees: 180), clockwise: false)
-            }
-            .fill(self.color)
-//            .rotation3DEffect(.degrees(mirrored ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-        }
-    }
+enum ChatItemAction {
+    case delete(messageItem: MessageItem)
+    case retry(messageItem: MessageItem)
 }
 
 struct ChatBubbleView: View {
     let type: MessageCreaterType
-    let mirrored: Bool
     let cornerRadius = 8.0
-    let horizontalSpacingMargin: CGFloat = 12
+    let horizontalSpacingMargin: CGFloat = 8
     let iconLength = CGFloat(12)
+    let isReceiveMessageDisplayOnlyMode: Bool
+    private var isMe: Bool { return type.isMe }
+    let itemAction: (ChatItemAction) -> Void
+
+    var bubbleTextColor: Color {
+        if isMe {
+            return .white
+        } else {
+            return type.messageItem.message.generatdBrightColor.appropriateTextColor
+        }
+    }
+
+    var bubbleViewBackgroundColor: Color {
+        if isMe {
+            return Contants.themeColor
+        } else {
+            return type.messageItem.displayUserName.generatdBrightColor
+                .opacity(0.8)
+        }
+    }
 
     @ViewBuilder
-    var statusIconView: some View {
+    private var statusIconView: some View {
         switch type.messageItem.readingStatus {
         case .reading:
             Image(systemName: "ellipsis")
+                .resizable()
+                .scaledToFit()
                 .symbolEffect(.variableColor.cumulative, options: .speed(10))
             // Ref: https://www.hackingwithswift.com/quick-start/swiftui/how-to-animate-sf-symbols
         case .readCompleted:
             Image(systemName: "checkmark")
+                .resizable()
+                .scaledToFit()
                 .foregroundStyle(type.messageItem.readingStatus.color)
         case .willRead:
             Image(systemName: "trash.fill")
+                .resizable()
+                .scaledToFit()
                 .foregroundStyle(type.messageItem.readingStatus.color)
         case .readingError:
             Image(systemName: "exclamationmark.triangle.fill")
+                .resizable()
+                .scaledToFit()
                 .foregroundStyle(type.messageItem.readingStatus.color)
         }
     }
 
-    var body: some View {
-        HStack(alignment: .bottom, spacing: 8) {
-            Text(type.messageItem.message)
-                .padding(.leading, horizontalSpacingMargin + (mirrored ? cornerRadius / 2 : 0))
-                .padding(.trailing, horizontalSpacingMargin + (!mirrored ? cornerRadius / 2 : 0))
-                .padding(.vertical, 4)
-                .background(BalloonShapeView(
-                    cornerRadius: cornerRadius,
-                    color: type.messageItem.readingStatus.color,
-                    mirrored: !type.isMe)
-                )
+    private func messageSideView(isMe: Bool) -> some View {
+        VStack(alignment: .leading) {
+            Text(type.messageItem.date.asString(withFormat: .timeHourNoZero))
+                .font(.system(size: 10))
             statusIconView
                 .frame(width: iconLength, height: iconLength)
+                .padding(.leading, 4)
+        }
+        .clipped()
+    }
+
+    var body: some View {
+        VStack(alignment: isMe ? .trailing : .leading) {
+            HStack(alignment: .bottom, spacing: 4) {
+                if isMe {
+                    Spacer()
+                    messageSideView(isMe: false)
+                }
+                Text(type.messageItem.message)
+                    .font(isReceiveMessageDisplayOnlyMode ? .largeTitle : .body)
+                    .padding(.leading, horizontalSpacingMargin + (!isMe ? cornerRadius : 0))
+                    .padding(.trailing, horizontalSpacingMargin + (isMe ? cornerRadius : 0))
+                    .padding(.vertical, 4)
+                    .foregroundColor(bubbleTextColor)
+                    .background(
+                        BalloonShapeView(
+                        cornerRadius: cornerRadius,
+                        color: bubbleViewBackgroundColor,
+                        mirrored: !isMe)
+                    )
+                    .onTapGesture {
+                        Task {
+                            switch type.messageItem.readingStatus {
+                            case .readingError:
+                                itemAction(.retry(messageItem: type.messageItem))
+                            case .willRead:
+                                itemAction(.delete(messageItem: type.messageItem))
+                            default:
+                                break
+                            }
+                        }
+                    }
+                    .contextMenu {
+                        Button(action: {
+                            PasteBoard.copy(text: type.messageItem.message)
+                        }) {
+                            Text("メッセージをコピーする")
+                            Image(systemName: "clipboard.fill")
+                        }
+                        Button(action: {
+                            PasteBoard.copy(text: type.messageItem.message)
+                        }) {
+                            Text("表示名をコピーする")
+                            Image(systemName: "clipboard.fill")
+                        }
+
+                        Button(action: {
+                            itemAction(.delete(messageItem: type.messageItem))
+                        }) {
+                            Label("削除する", systemImage: "trash.fill")
+                        }
+                    }
+                if !isMe {
+                    messageSideView(isMe: true)
+                    Spacer()
+                }
+            }
+            if !isMe {
+                Text("by \(type.messageItem.displayUserName)")
+                    .font(.system(size: 13))
+                    .padding(.leading, 8)
+            }
         }
     }
 }
 
 #Preview {
-    VStack(alignment: .leading, spacing: 0) {
+    VStack(alignment: .leading, spacing: 12) {
         ChatBubbleView(
             type: .me(messageItem: .init(
-                message: "willRead " + .random,
+                message: "willRead " + .random(range: 0...20),
                 date: Date(),
-                displayUserName: "DisplayName",
+                displayUserName: .random(range: 0...10),
                 readingStatus: .willRead
             )),
-            mirrored: true
-        )
+            isReceiveMessageDisplayOnlyMode : true) { _ in }
         ChatBubbleView(
-            type: .me(messageItem: .init(
-                message: "reading " + .random,
+            type: .other(messageItem: .init(
+                message: "reading " + .random(range: 0...20),
                 date: Date(),
-                displayUserName: "DisplayName",
+                displayUserName: .random(range: 0...10),
                 readingStatus: .reading
             )),
-            mirrored: true
-        )
+            isReceiveMessageDisplayOnlyMode : true) { _ in }
         ChatBubbleView(
-            type: .me(messageItem: .init(
-                message: "readCompleted " + .random,
+            type: .other(messageItem: .init(
+                message: "readCompleted " + .random(range: 0...20),
                 date: Date(),
                 displayUserName: "DisplayName",
                 readingStatus: .readCompleted
             )),
-            mirrored: true
-        )
+            isReceiveMessageDisplayOnlyMode : false) { _ in }
         ChatBubbleView(
             type: .other(messageItem: .init(
-                message: "readingError " + .random,
+                message: "readingError " + .random(range: 0...20),
                 date: Date(),
-                displayUserName: "OtherDisplayName",
+                displayUserName: "DisplayName",
                 readingStatus: .readingError
             )),
-            mirrored: false
-        )
+            isReceiveMessageDisplayOnlyMode : false) { _ in }
     }
 }

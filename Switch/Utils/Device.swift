@@ -29,7 +29,7 @@ enum Device {
 #if os(iOS)
         return UIDevice.current.name
 #elseif os(macOS)
-        return NSHost.current.hostName
+        return Host.current().name ?? "Mac"
 #endif
     }
 }
