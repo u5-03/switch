@@ -25,7 +25,7 @@ struct ChatBubbleView: View {
         if isMe {
             return .white
         } else {
-            return type.messageItem.message.generatdBrightColor.appropriateTextColor
+            return type.messageItem.displayUserName.generatdBrightColor.appropriateTextColor
         }
     }
 
@@ -111,20 +111,20 @@ struct ChatBubbleView: View {
                         Button(action: {
                             PasteBoard.copy(text: type.messageItem.message)
                         }) {
-                            Text("メッセージをコピーする")
+                            Text(String(localized: "Menu.copyMessage", defaultValue: "メッセージをコピーする"))
                             Image(systemName: "clipboard.fill")
                         }
                         Button(action: {
                             PasteBoard.copy(text: type.messageItem.message)
                         }) {
-                            Text("表示名をコピーする")
+                            Text(String(localized: "Menu.copyDisplayName", defaultValue: "表示名をコピーする"))
                             Image(systemName: "clipboard.fill")
                         }
 
                         Button(action: {
                             itemAction(.delete(messageItem: type.messageItem))
                         }) {
-                            Label("削除する", systemImage: "trash.fill")
+                            Label(String(localized: "Menu.delete", defaultValue: "削除する"), systemImage: "trash.fill")
                         }
                     }
                 if !isMe {
@@ -145,7 +145,7 @@ struct ChatBubbleView: View {
     VStack(alignment: .leading, spacing: 12) {
         ChatBubbleView(
             type: .me(messageItem: .init(
-                message: "willRead " + .random(range: 0...20),
+                message: String(localized: "ReadingStatus.willRead", defaultValue: "willRead ") + .random(range: 0...20),
                 date: Date(),
                 displayUserName: .random(range: 0...10),
                 readingStatus: .willRead
@@ -153,7 +153,7 @@ struct ChatBubbleView: View {
             isReceiveMessageDisplayOnlyMode : true) { _ in }
         ChatBubbleView(
             type: .other(messageItem: .init(
-                message: "reading " + .random(range: 0...20),
+                message: String(localized: "ReadingStatus.reading", defaultValue: "reading ") + .random(range: 0...20),
                 date: Date(),
                 displayUserName: .random(range: 0...10),
                 readingStatus: .reading
@@ -161,17 +161,17 @@ struct ChatBubbleView: View {
             isReceiveMessageDisplayOnlyMode : true) { _ in }
         ChatBubbleView(
             type: .other(messageItem: .init(
-                message: "readCompleted " + .random(range: 0...20),
+                message: String(localized: "ReadingStatus.readCompleted", defaultValue: "readCompleted ") + .random(range: 0...20),
                 date: Date(),
-                displayUserName: "DisplayName",
+                displayUserName: String(localized: "DisplayName", defaultValue: "DisplayName"),
                 readingStatus: .readCompleted
             )),
             isReceiveMessageDisplayOnlyMode : false) { _ in }
         ChatBubbleView(
             type: .other(messageItem: .init(
-                message: "readingError " + .random(range: 0...20),
+                message: String(localized: "ReadingStatus.readingError", defaultValue: "readingError ") + .random(range: 0...20),
                 date: Date(),
-                displayUserName: "DisplayName",
+                displayUserName: String(localized: "DisplayName", defaultValue: "DisplayName"),
                 readingStatus: .readingError
             )),
             isReceiveMessageDisplayOnlyMode : false) { _ in }

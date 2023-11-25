@@ -22,7 +22,7 @@ struct ConfigView: View {
 
     var connectionSectionView: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            Section("接続モード") {
+            Section(String(localized: "Config.section.title.connectionMode", defaultValue: "接続モード")) {
                 Toggle(isOn: viewStore.binding { state in
                     state.mcState.userMode == .host
                 } send: { value in
@@ -34,7 +34,7 @@ struct ConfigView: View {
                     Button(action: {
                         viewStore.send(.configAction(action: .setSheet(isPresented: true)))
                     }, label: {
-                        Text("ゲストデバイスを探す")
+                        Text(String(localized: "Config.findGuests", defaultValue: "ゲストデバイスを探す"))
                     })
                     .buttonStyle(BorderlessButtonStyle())
                 } else {
@@ -42,13 +42,13 @@ struct ConfigView: View {
                         Button(action: {
                             viewStore.send(.configAction(action: .didTapAdvertisingPeerButton))
                         }, label: {
-                            Text(viewStore.mcState.isStartAdvertisingPeer ? "検索を停止する" : "ホストを探す")
+                            Text(viewStore.mcState.isStartAdvertisingPeer ? String(localized: "Config.stopSearch", defaultValue: "検索を停止する") : String(localized: "Config.searchHost", defaultValue: "ホストを探す"))
                         })
                         .buttonStyle(BorderlessButtonStyle())
                         Spacer()
                         if viewStore.mcState.isStartAdvertisingPeer {
                             HStack(spacing: 2) {
-                                Text("デバイスを探しています")
+                                Text(String(localized: "Config.seachDevices", defaultValue: "デバイスを探しています"))
                                 Image(systemName: "ellipsis")
                                     .symbolEffect(.variableColor.cumulative, options: .speed(10))
                             }
@@ -65,44 +65,44 @@ struct ConfigView: View {
                 Form {
                     connectionSectionView
                     if !MCManager.shared.connectedDevices.isEmpty {
-                        Section("接続済みデバイス") {
+                        Section(String(localized: "Config.section.title.connectedDevice", defaultValue: "接続済みデバイス")) {
                             ForEach(viewStore.mcState.connectedPeerInfos) { info in
                                 Text(info.peerId.displayName)
                             }
                         }
                     }
-                    Section("アプリ設定") {
+                    Section(String(localized: "Config.section.title.appConfig", defaultValue: "アプリ設定")) {
                         Toggle(isOn: viewStore.binding { state in
                             state.mcState.isReadTextEnable
                         } send: { value in
                                 .configAction(action: .toggleReadTextEnable)
                         }, label: {
-                            Text("文字の読み上げ")
+                            Text(String(localized: "Config.readText", defaultValue: "文字の読み上げ"))
                         })
                         Toggle(isOn: viewStore.binding { state in
                             state.mcState.isGuestReadTextEnable
                         } send: { value in
                                 .configAction(action: .toggleGuestReadTextEnable)
                         }, label: {
-                            Text("相手の文字の読み上げ")
+                            Text(String(localized: "Config.readOnlyOppsiteText", defaultValue: "相手の文字の読み上げ"))
                         })
                         Toggle(isOn: viewStore.binding { state in
                             state.mcState.isReceiveMessageDisplayOnlyMode
                         } send: { value in
                                 .configAction(action: .toggleReceiveMessageDisplayOnlyMode)
                         }, label: {
-                            Text("相手の文字のみ表示")
+                            Text(String(localized: "Config.toggleOnlyOppositeText", defaultValue: "相手の文字のみ表示"))
                         })
                         NavigationLink {
                             EditUserDisplayNameView(store: store)
                         } label: {
-                            LabeledContent("表示名") {
+                            LabeledContent(String(localized: "Config.displayName", defaultValue: "表示名")) {
                                 Text(viewStore.mcState.userDisplayName)
                             }
                         }
                     }
-                    Section("情報") {
-                        LabeledContent("デバイス名") {
+                    Section(String(localized: "Config.section.title.information", defaultValue: "情報")) {
+                        LabeledContent(String(localized: "Config.DeviceName", defaultValue: "デバイス名")) {
                             Text(Device.marketingName ?? Device.name)
                         }
                     }
@@ -112,7 +112,7 @@ struct ConfigView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text("閉じる")
+                        Text("close")
                     }
                     .controlSize(.large)
                     .buttonStyle(.borderedProminent)
@@ -128,7 +128,7 @@ struct ConfigView: View {
                 ) {
                     NavigationStack {
                         MCBrowserViewControllerWrapper(serviceType: sessionType, peerID: myPeerID, session: session)
-                            .navigationTitle("受信デバイスを探す")
+                            .navigationTitle(String(localized: "Config.title", defaultValue: "受信デバイスを探す"))
 //                            .toolbar {
 //                                ToolbarItem {
 //                                    Button {
@@ -153,11 +153,11 @@ struct ConfigView: View {
                         Button {
                             dismiss()
                         } label: {
-                            Text("閉じる")
+                            Text(String(localized: "close", defaultValue: "閉じる"))
                         }
                     }
                 }
-                .navigationTitle("設定")
+                .navigationTitle(String(localized: "Config.title", defaultValue: "設定"))
             }
         }
     }

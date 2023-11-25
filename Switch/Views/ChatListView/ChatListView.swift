@@ -51,7 +51,7 @@ struct ChatListView: View {
     private var textFieldView: some View {
         return WithViewStore(store, observe: { $0 }) { viewStore in
             HStack {
-                TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged))
+                TextField(String(localized: "placeholder", defaultValue: "Enter Text"), text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged))
                 // axis: .verticalを指定すると、macのキーボードで入力した時に、Enterが効かなくなるので、一時的に外す
                 //                TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged), axis: .vertical)
                     .autocorrectionDisabled()
@@ -70,7 +70,7 @@ struct ChatListView: View {
                         }
                     }
                 }, label: {
-                    Text("Send")
+                    Text(String(localized: "send", defaultValue: "送信"))
                 })
                 .controlSize(.regular)
                 .buttonStyle(.borderedProminent)
@@ -94,7 +94,7 @@ struct ChatListView: View {
                             }
                         }
                 }
-                .navigationTitle("Switch")
+                .navigationTitle(String(localized: "AppName", defaultValue: "Switch"))
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
@@ -111,7 +111,9 @@ struct ChatListView: View {
                         send: { .toggleConfigButtonPresented }()
                     ), content: {
                         ConfigView(store: store)
+                        #if os(macOS)
                             .frame(width: 300, height: 400)
+                        #endif
                     }
                 )
                 .task { await viewStore.send(.task).finish() }

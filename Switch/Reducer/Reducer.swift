@@ -257,14 +257,14 @@ struct Feature: Reducer {
                         }
                     } else {
                         state.advertiserInvitationAlertState = .init(
-                            title: .init("ホストから招待が届きました"),
-                            message: .init("ホストからの招待を承認しますか？"),
+                            title: .init(String(localized: "Config.Reducer.alert.title", defaultValue: "ホストから招待が届きました")),
+                            message: .init(String(localized: "Config.Reducer.alert.message", defaultValue: "ホストからの招待を承認しますか？")),
                             primaryButton: .cancel(
-                                .init("キャンセル"),
+                                .init(String(localized: "Cancel", defaultValue: "キャンセル")),
                                 action: .send(.didTapAdvertiserInvitationCancelButton(info: info))
                             ),
                             secondaryButton: .default(
-                                .init("承認"),
+                                .init(String(localized: "Approve", defaultValue: "承認")),
                                 action: .send(.didTapAdvertiserInvitationOkButton(info: info))
                             )
                         )

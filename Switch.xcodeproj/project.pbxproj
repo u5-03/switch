@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68DF13582B11E64F00DD8519 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 68DF13572B11E64E00DD8519 /* Localizable.xcstrings */; };
 		C32F52542AB83EDE009AE7C6 /* TextReaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */; };
 		C32F52582AB84258009AE7C6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52572AB84258009AE7C6 /* Error.swift */; };
 		C348C8D02AC9318C007C73FB /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348C8CF2AC9318C007C73FB /* PasteBoard.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68DF13572B11E64E00DD8519 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderManager.swift; sourceTree = "<group>"; };
 		C32F52572AB84258009AE7C6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		C348C8CF2AC9318C007C73FB /* PasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteBoard.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68DF13562B11E62800DD8519 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				68DF13572B11E64E00DD8519 /* Localizable.xcstrings */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		C32F52522AB83ECB009AE7C6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +148,7 @@
 		C358175B2AAF1B3A00428704 /* Switch */ = {
 			isa = PBXGroup;
 			children = (
+				68DF13562B11E62800DD8519 /* Assets */,
 				C3D5C0722ABE6E9800530AA2 /* Reducer */,
 				C3D5C06D2ABE6BBD00530AA2 /* State */,
 				C3D5C06A2ABE698100530AA2 /* Dependencies */,
@@ -327,6 +338,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = C35817502AAF1B3A00428704;
 			packageReferences = (
@@ -348,6 +360,7 @@
 			files = (
 				C35817652AAF1B3A00428704 /* Preview Assets.xcassets in Resources */,
 				C35817612AAF1B3A00428704 /* Assets.xcassets in Resources */,
+				68DF13582B11E64F00DD8519 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
