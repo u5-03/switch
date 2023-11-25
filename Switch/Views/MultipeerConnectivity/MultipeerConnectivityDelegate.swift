@@ -86,6 +86,7 @@ extension MultipeerConnectivityDelegate: MCSessionDelegate {
 extension MultipeerConnectivityDelegate: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         //        invitationHandler(true, mcSession)
+        // 周囲のデバイスにこのデバイスの情報が表示されるようになる
         send(.advertiserDidReceiveInvitationFromPeer(peerID: peerID, context: context, invitationHandler: invitationHandler))
     }
 }

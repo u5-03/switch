@@ -110,6 +110,7 @@ struct Feature: Reducer {
         case task
         case willScrollToBottom
         case didScrollToBottom
+        case changedScene(ScenePhase)
 
         case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
     }
@@ -169,6 +170,16 @@ struct Feature: Reducer {
                 return updateMessageItem(index: index, readingStatus: .readCompleted, state: &state)
             case .startMultipeerConnectivity:
                 return .none
+            case .changedScene(let scene):
+                switch scene {
+                case .active:
+                    print("Returned from Background")
+//                    return .send(<#T##action: Action##Action#>)
+                case .inactive: break
+                case .background: break
+                @unknown default:
+                    break
+                }
             case .task:
                 return .run { send in
                     await withTaskGroup(of: Void.self) { group in
@@ -205,7 +216,17 @@ struct Feature: Reducer {
                 return .none
             case .mcAction(let action):
                 switch action {
-                case .sessionDidChanaged(_, _):
+                case .sessionDidChanaged(let peerId, let sessionState):
+                    switch sessionState {
+                    case .notConnected:
+                        print("PeerId: \(peerId.displayName) notConnected")
+                    case .connecting:
+                        print("PeerId: \(peerId.displayName) connecting")
+                    case .connected:
+                        print("PeerId: \(peerId.displayName) connected")
+                    @unknown default:
+                        print("PeerId: \(peerId.displayName) default")
+                    }
                     state.mcState.connectedPeerInfos = MCManager.shared.mcSession.connectedPeers
                         .map({ PeerInfo(peerId: $0) })
                 case .sessionDidReceived(let data, let peerID):
@@ -230,18 +251,25 @@ struct Feature: Reducer {
 
                 case .advertiserDidReceiveInvitationFromPeer(let peerID, _, let invitationHandler):
                     let info = AdvertiserInvitationInfo(peerId: peerID, invitationHandler: invitationHandler)
-                    state.advertiserInvitationAlertState = .init(
-                        title: .init("ホストから招待が届きました"),
-                        message: .init("ホストからの招待を承認しますか？"),
-                        primaryButton: .cancel(
-                            .init("キャンセル"),
-                            action: .send(.didTapAdvertiserInvitationCancelButton(info: info))
-                        ),
-                        secondaryButton: .default(
-                            .init("承認"),
-                            action: .send(.didTapAdvertiserInvitationOkButton(info: info))
+                    if state.mcState.connectedPeerInfosCache.contains(where: { $0.peerId == peerID }) {
+                        return .run { _ in
+                            info.invitationHandler(true, MCManager.shared.mcSession)
+                        }
+                    } else {
+                        state.advertiserInvitationAlertState = .init(
+                            title: .init("ホストから招待が届きました"),
+                            message: .init("ホストからの招待を承認しますか？"),
+                            primaryButton: .cancel(
+                                .init("キャンセル"),
+                                action: .send(.didTapAdvertiserInvitationCancelButton(info: info))
+                            ),
+                            secondaryButton: .default(
+                                .init("承認"),
+                                action: .send(.didTapAdvertiserInvitationOkButton(info: info))
+                            )
                         )
-                    )
+                    }
+
                 case .browserFound(_, let foundPeerId, _):
                     state.mcState.connectionCandidatePeerInfos.append(.init(peerId: foundPeerId))
                 case .browserLost(_, let lostPeerId):
@@ -313,6 +341,10 @@ struct Feature: Reducer {
                     state.mcState.isReceiveMessageDisplayOnlyMode.toggle()
                 case .didChangedUserDisplayNameText(let text):
                     state.mcState.userDisplayName = text
+                case .backedFromBackground:
+                    if state.mcState.connectedPeerInfos != state.mcState.connectedPeerInfos {
+                        
+                    }
                 }
             }
             return .none

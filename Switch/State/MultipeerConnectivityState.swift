@@ -58,6 +58,7 @@ enum ConfigAction: Equatable {
     case toggleGuestReadTextEnable
     case toggleReceiveMessageDisplayOnlyMode
     case didChangedUserDisplayNameText(name: String)
+    case backedFromBackground
 
     enum AdvertiserInvitationAlertAction: Equatable {
         case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
@@ -71,6 +72,7 @@ enum ConfigAction: Equatable {
 
 struct MultipeerConnectivityState: Equatable {
     var connectedPeerInfos: [PeerInfo] = []
+    var connectedPeerInfosCache: [PeerInfo] = []
     var connectionCandidatePeerInfos: [PeerInfo] = []
     var isStartAdvertisingPeer = false
     var shouldShowAdvertiserInvitationAlert = false

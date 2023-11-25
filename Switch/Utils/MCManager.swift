@@ -62,7 +62,7 @@ final class MCManager {
         advertiser.stopAdvertisingPeer()
     }
 
-    func join() {}
+    func join(peerInfo: PeerInfo) {}
 
     func sendMessage(text: String) {
         print(text)

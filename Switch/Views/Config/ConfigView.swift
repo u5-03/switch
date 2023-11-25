@@ -106,6 +106,19 @@ struct ConfigView: View {
                             Text(Device.marketingName ?? Device.name)
                         }
                     }
+                    #if os(macOS)
+                    Spacer()
+                        .frame(height: 40)
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("閉じる")
+                    }
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+
+                    #endif
                 }
                 .sheet(
                     isPresented: viewStore.binding(
