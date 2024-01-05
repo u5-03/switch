@@ -14,25 +14,26 @@ enum NavigationType {
 
 struct ConfigView: View {
     @Environment(\.dismiss) private var dismiss
+    @Dependency(\.sharedState) var sharedState
     private let myPeerID = MCManager.shared.peerID
     private let session = MCManager.shared.mcSession
     private let sessionType = MCManager.shared.serviceType
 
-    let store: StoreOf<Feature>
+    let configStore: StoreOf<ConfigReducer>
 
     var connectionSectionView: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(configStore, observe: { $0 }) { viewStore in
             Section("接続モード") {
-                Toggle(isOn: viewStore.binding { state in
-                    state.mcState.userMode == .host
-                } send: { value in
-                        .configAction(action: .switchHostMode)
-                }, label: {
-                    Text(viewStore.state.mcState.userMode.displayName)
-                })
-                if viewStore.state.mcState.userMode == .host {
+                Toggle(isOn: viewStore.binding(get: { state in
+                    state.userMode == .host
+                }, send: { value in
+                    ConfigReducer.Action.switchHostMode
+                })) {
+                    Text(viewStore.userMode.displayName)
+                }
+                if viewStore.userMode == .host {
                     Button(action: {
-                        viewStore.send(.configAction(action: .setSheet(isPresented: true)))
+                        viewStore.send(.switchMcBrowserSheet(isPresented: true))
                     }, label: {
                         Text("ゲストデバイスを探す")
                     })
@@ -40,13 +41,13 @@ struct ConfigView: View {
                 } else {
                     HStack {
                         Button(action: {
-                            viewStore.send(.configAction(action: .didTapAdvertisingPeerButton))
+                            viewStore.send(.didTapAdvertisingPeerButton)
                         }, label: {
-                            Text(viewStore.mcState.isStartAdvertisingPeer ? "検索を停止する" : "ホストを探す")
+                            Text(viewStore.isStartAdvertisingPeer ? "検索を停止する" : "ホストを探す")
                         })
                         .buttonStyle(BorderlessButtonStyle())
                         Spacer()
-                        if viewStore.mcState.isStartAdvertisingPeer {
+                        if viewStore.isStartAdvertisingPeer {
                             HStack(spacing: 2) {
                                 Text("デバイスを探しています")
                                 Image(systemName: "ellipsis")
@@ -59,91 +60,92 @@ struct ConfigView: View {
         }
     }
 
+    @ViewBuilder
+    var connectedDevicesView: some View {
+        if !MCManager.shared.connectedDevices.isEmpty {
+            Section("接続済みデバイス") {
+                ForEach(sharedState.get().connectedPeerInfos) { info in
+                    Text(info.peerId.displayName)
+                }
+            }
+        }
+    }
+
+    var appSettingView: some View {
+        WithViewStore(configStore, observe: { $0 }) { viewStore in
+            Section("アプリ設定") {
+                Toggle(isOn: viewStore.binding { state in
+                    viewStore.sharedState.isReadTextEnable
+                } send: { _ in
+                        .toggleReadTextEnable
+                }, label: {
+                    Text("文字の読み上げ")
+                })
+
+                Toggle(isOn: viewStore.binding { state in
+                    viewStore.sharedState.isGuestReadTextEnable
+                } send: { _ in
+                        .toggleGuestReadTextEnable
+                }, label: {
+                    Text("相手の文字の読み上げ")
+                })
+                Toggle(isOn: viewStore.binding { state in
+                    viewStore.sharedState.isReceiveMessageDisplayOnlyMode
+                } send: { value in
+                        .toggleReceiveMessageDisplayOnlyMode
+                }, label: {
+                    Text("相手の文字のみ表示")
+                })
+                NavigationLink {
+                    EditUserDisplayNameView(configStore: configStore)
+                } label: {
+                    LabeledContent("表示名") {
+                        Text(viewStore.sharedState.userDisplayName)
+                    }
+                }
+            }
+        }
+    }
+
+    var informationView: some View {
+        Section("情報") {
+            LabeledContent("デバイス名") {
+                Text(Device.marketingName ?? Device.name)
+            }
+        }
+    }
+
+
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(configStore, observe: { $0 }) { viewStore in
             NavigationStack {
                 Form {
                     connectionSectionView
-                    if !MCManager.shared.connectedDevices.isEmpty {
-                        Section("接続済みデバイス") {
-                            ForEach(viewStore.mcState.connectedPeerInfos) { info in
-                                Text(info.peerId.displayName)
-                            }
-                        }
-                    }
-                    Section("アプリ設定") {
-                        Toggle(isOn: viewStore.binding { state in
-                            state.mcState.isReadTextEnable
-                        } send: { value in
-                                .configAction(action: .toggleReadTextEnable)
-                        }, label: {
-                            Text("文字の読み上げ")
-                        })
-                        Toggle(isOn: viewStore.binding { state in
-                            state.mcState.isGuestReadTextEnable
-                        } send: { value in
-                                .configAction(action: .toggleGuestReadTextEnable)
-                        }, label: {
-                            Text("相手の文字の読み上げ")
-                        })
-                        Toggle(isOn: viewStore.binding { state in
-                            state.mcState.isReceiveMessageDisplayOnlyMode
-                        } send: { value in
-                                .configAction(action: .toggleReceiveMessageDisplayOnlyMode)
-                        }, label: {
-                            Text("相手の文字のみ表示")
-                        })
-                        NavigationLink {
-                            EditUserDisplayNameView(store: store)
-                        } label: {
-                            LabeledContent("表示名") {
-                                Text(viewStore.mcState.userDisplayName)
-                            }
-                        }
-                    }
-                    Section("情報") {
-                        LabeledContent("デバイス名") {
-                            Text(Device.marketingName ?? Device.name)
-                        }
-                    }
+                    connectedDevicesView
+                    appSettingView
+                    informationView
                 }
                 .sheet(
                     isPresented: viewStore.binding(
                         get: \.isMcBrowserSheetPresented,
-                        send: { .configAction(action: .setSheet(isPresented: $0)) }
+                        send: { ConfigReducer.ConfigAction.switchMcBrowserSheet(isPresented: $0) }
                     )
                 ) {
                     NavigationStack {
                         MCBrowserViewControllerWrapper(serviceType: sessionType, peerID: myPeerID, session: session)
                             .navigationTitle("受信デバイスを探す")
-//                            .toolbar {
-//                                ToolbarItem {
-//                                    Button {
-//                                        dismiss()
-//                                    } label: {
-//                                        Text("閉じる")
-//                                    }
-//                                }
-//                            }
+                        //                            .toolbar {
+                        //                                ToolbarItem {
+                        //                                    Button {
+                        //                                        dismiss()
+                        //                                    } label: {
+                        //                                        Text("閉じる")
+                        //                                    }
+                        //                                }
+                        //                            }
                     }
                 }
-                .alert(
-                    store: store.scope(
-                        state: \.$advertiserInvitationAlertState,
-                        action: { Feature.Action.advertiserInvitationAlert(action: $0) }
-                    ), state: { state in
-                        state
-                    }, action: { $0 }
-                )
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("閉じる")
-                        }
-                    }
-                }
+                .alert(store: configStore.scope(state: \.$advertiserInvitationAlertState, action: ConfigReducer.ConfigAction.advertiserInvitationAlert))
                 .navigationTitle("設定")
             }
         }
@@ -151,7 +153,7 @@ struct ConfigView: View {
 }
 
 #Preview {
-    ConfigView(store: .init(initialState: .init(), reducer: {
-        Feature()
+    ConfigView(configStore: .init(initialState: .init(), reducer: {
+        ConfigReducer()
     }))
 }

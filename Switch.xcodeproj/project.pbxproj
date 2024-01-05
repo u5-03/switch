@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C301C2472B03801C00E89AE7 /* ChatListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301C2462B03801C00E89AE7 /* ChatListReducer.swift */; };
+		C3068DB12AF746EE0049501B /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3068DB02AF746EE0049501B /* RootTabView.swift */; };
+		C3068DB32AF747320049501B /* RootTabReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3068DB22AF747320049501B /* RootTabReducer.swift */; };
+		C30A5DB72AFAA4C000A12434 /* SharedStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30A5DB62AFAA4C000A12434 /* SharedStateReducer.swift */; };
 		C32F52542AB83EDE009AE7C6 /* TextReaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */; };
 		C32F52582AB84258009AE7C6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32F52572AB84258009AE7C6 /* Error.swift */; };
 		C348C8D02AC9318C007C73FB /* PasteBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348C8CF2AC9318C007C73FB /* PasteBoard.swift */; };
@@ -14,6 +18,7 @@
 		C358175F2AAF1B3A00428704 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358175E2AAF1B3A00428704 /* ContentView.swift */; };
 		C35817612AAF1B3A00428704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35817602AAF1B3A00428704 /* Assets.xcassets */; };
 		C35817652AAF1B3A00428704 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35817642AAF1B3A00428704 /* Preview Assets.xcassets */; };
+		C35CA67E2AFD3FCA00170992 /* ConfigReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CA67D2AFD3FCA00170992 /* ConfigReducer.swift */; };
 		C388E8EB2AC4732200332D98 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C388E8EA2AC4732200332D98 /* UserDefaults.swift */; };
 		C39A4ABF2AAF2DF100C558C3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */; };
 		C39A4AC22AAF32EB00C558C3 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */; };
@@ -42,6 +47,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C301C2462B03801C00E89AE7 /* ChatListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListReducer.swift; sourceTree = "<group>"; };
+		C3068DB02AF746EE0049501B /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		C3068DB22AF747320049501B /* RootTabReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabReducer.swift; sourceTree = "<group>"; };
+		C30A5DB62AFAA4C000A12434 /* SharedStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStateReducer.swift; sourceTree = "<group>"; };
 		C32F52532AB83EDE009AE7C6 /* TextReaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderManager.swift; sourceTree = "<group>"; };
 		C32F52572AB84258009AE7C6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		C348C8CF2AC9318C007C73FB /* PasteBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteBoard.swift; sourceTree = "<group>"; };
@@ -51,6 +60,7 @@
 		C35817602AAF1B3A00428704 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35817622AAF1B3A00428704 /* Switch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Switch.entitlements; sourceTree = "<group>"; };
 		C35817642AAF1B3A00428704 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C35CA67D2AFD3FCA00170992 /* ConfigReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigReducer.swift; sourceTree = "<group>"; };
 		C388E8EA2AC4732200332D98 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		C39A4ABE2AAF2DF100C558C3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		C39A4AC12AAF32EB00C558C3 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
@@ -90,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C3068DAF2AF746D80049501B /* RootTab */ = {
+			isa = PBXGroup;
+			children = (
+				C3068DB02AF746EE0049501B /* RootTabView.swift */,
+			);
+			path = RootTab;
+			sourceTree = "<group>";
+		};
 		C32F52522AB83ECB009AE7C6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +214,7 @@
 		C39A4AC02AAF32DE00C558C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3068DAF2AF746D80049501B /* RootTab */,
 				C3D5C0642ABDE61500530AA2 /* Config */,
 				C3EB8E852AB89FD5006EB664 /* MultipeerConnectivity */,
 				C3EB8E7D2AB87DA8006EB664 /* ChatListView */,
@@ -251,6 +270,10 @@
 			isa = PBXGroup;
 			children = (
 				C3D5C0732ABE6EA300530AA2 /* Reducer.swift */,
+				C3068DB22AF747320049501B /* RootTabReducer.swift */,
+				C30A5DB62AFAA4C000A12434 /* SharedStateReducer.swift */,
+				C35CA67D2AFD3FCA00170992 /* ConfigReducer.swift */,
+				C301C2462B03801C00E89AE7 /* ChatListReducer.swift */,
 			);
 			path = Reducer;
 			sourceTree = "<group>";
@@ -358,7 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3068DB32AF747320049501B /* RootTabReducer.swift in Sources */,
 				C3D5C0812AC0822600530AA2 /* Dependencies.swift in Sources */,
+				C301C2472B03801C00E89AE7 /* ChatListReducer.swift in Sources */,
 				C39A4AC22AAF32EB00C558C3 /* ChatListView.swift in Sources */,
 				C3D5C0852AC1F92F00530AA2 /* Color.swift in Sources */,
 				C3A564D02AC7BCF10091BAC4 /* Optional.swift in Sources */,
@@ -374,11 +399,14 @@
 				C348C8D02AC9318C007C73FB /* PasteBoard.swift in Sources */,
 				C3D5C0872AC1FB7100530AA2 /* Contants.swift in Sources */,
 				C3D5C0892AC1FE3400530AA2 /* BalloonShapeView.swift in Sources */,
+				C3068DB12AF746EE0049501B /* RootTabView.swift in Sources */,
 				C3D5C06C2ABE6B4100530AA2 /* MultipeerConnectivityClient.swift in Sources */,
 				C3EB8E892AB8A37C006EB664 /* MultipeerConnectivityView.swift in Sources */,
 				C3D5C0742ABE6EA300530AA2 /* Reducer.swift in Sources */,
+				C30A5DB72AFAA4C000A12434 /* SharedStateReducer.swift in Sources */,
 				C3D5C0762ABEC80E00530AA2 /* MultipeerConnectivityDelegate.swift in Sources */,
 				C3A564CE2AC7B9E30091BAC4 /* EditUserDisplayNameView.swift in Sources */,
+				C35CA67E2AFD3FCA00170992 /* ConfigReducer.swift in Sources */,
 				C3D5C0602ABDE25100530AA2 /* Device.swift in Sources */,
 				C3D5C0712ABE6BF800530AA2 /* MultipeerConnectivityState.swift in Sources */,
 				C32F52582AB84258009AE7C6 /* Error.swift in Sources */,

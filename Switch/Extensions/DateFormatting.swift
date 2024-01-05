@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-import Foundation
-
 /// String->Date変換用のフォーマット
 public enum StringToDateFormat: String {
     case dateFormat = "yyyy-MM-dd"

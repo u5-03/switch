@@ -14,10 +14,10 @@
             filePath = "Switch/Reducer/Reducer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   uuid = "86C49552-B7FD-47B5-B5E7-E7559A12590B - 967864ef470f2404"
@@ -62,8 +62,8 @@
             filePath = "Switch/State/MultipeerConnectivityState.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "userDisplayName"
             landmarkType = "24">
          </BreakpointContent>
@@ -178,6 +178,841 @@
             endingLineNumber = "67"
             landmarkName = "session(_:didReceive:fromPeer:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0267D04D-A6BC-431B-96EE-E43CD5D1497C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/RootTabReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5E9C6DB-A515-4685-ABBF-7013EA7026AD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ConfigReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B74A25A-CF4E-4E6E-A6C3-5D17174B5F6E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ConfigReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E40F5ECE-3440-4C4F-8027-73DE612492E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C8220EC3-0AC1-42EF-9E54-A41A43EE152A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "modify(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C8220EC3-0AC1-42EF-9E54-A41A43EE152A - f3c5c0a25e87d2e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Switch.SharedStateClient.modify((inout Switch.SharedState) -&gt; ()) async -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "C8220EC3-0AC1-42EF-9E54-A41A43EE152A - f3c5c0a25e87d0fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Switch.SharedStateClient.modify((inout Switch.SharedState) -&gt; ()) async -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E360C9D9-8606-4D8D-8163-A493F93986D3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "subscript(dynamicMember:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E360C9D9-8606-4D8D-8163-A493F93986D3 - b0e483e3ccb7f0ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Switch.SharedStateClient.subscript.getter : &lt;&#x3c4;_0_0&gt;(dynamicMember: Swift.KeyPath&lt;Switch.SharedState, &#x3c4;_0_0&gt;) -&gt; Swift.AsyncStream&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "E360C9D9-8606-4D8D-8163-A493F93986D3 - 48d389050954f0d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Switch.SharedState) async -&gt; &#x3c4;_0_0 in Switch.SharedStateClient.subscript.getter : &lt;&#x3c4;_0_0&gt;(dynamicMember: Swift.KeyPath&lt;Switch.SharedState, &#x3c4;_0_0&gt;) -&gt; Swift.AsyncStream&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "E360C9D9-8606-4D8D-8163-A493F93986D3 - 43702add394dae86"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable (Switch.SharedState) async -&gt; &#x3c4;_0_0 in Switch.SharedStateClient.subscript.getter : &lt;&#x3c4;_0_0&gt;(dynamicMember: Swift.KeyPath&lt;Switch.SharedState, &#x3c4;_0_0&gt;) -&gt; Swift.AsyncStream&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "60E1CECF-F79D-42CF-A707-6ED8CD742FA3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "liveValue"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "60E1CECF-F79D-42CF-A707-6ED8CD742FA3 - b94ced9bce237357"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #2 @Sendable (Switch.SharedState) async -&gt; () in static Switch.SharedStateClient.liveValue.getter : Switch.SharedStateClient"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "60E1CECF-F79D-42CF-A707-6ED8CD742FA3 - 9f7e67e96be526a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (inout Switch.SharedState) -&gt; () in closure #2 @Sendable (Switch.SharedState) async -&gt; () in static Switch.SharedStateClient.liveValue.getter : Switch.SharedStateClient"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "60E1CECF-F79D-42CF-A707-6ED8CD742FA3 - b94ced9bce237376"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #2 @Sendable (Switch.SharedState) async -&gt; () in static Switch.SharedStateClient.liveValue.getter : Switch.SharedStateClient"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "60E1CECF-F79D-42CF-A707-6ED8CD742FA3 - 9f7e67e96be5294a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (inout Switch.SharedState) -&gt; () in closure #2 @Sendable (Switch.SharedState) async -&gt; () in static Switch.SharedStateClient.liveValue.getter : Switch.SharedStateClient"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/SharedStateReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF91CA45-D0E2-4E71-AD3D-4C9EB24D8662"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ConfigReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89759F9C-0EFE-41A0-B9DB-E6AF09402CA1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "modify(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12D245F3-FCDD-46D6-A1CA-6B0A6A6EB7B2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/SharedStateReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "liveValue"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B639C4C-ACDB-4F1B-A354-2477DCABCC1E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ConfigReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D4503E3-57C7-425C-9A4B-CDBA7092D8EA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ChatListReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5D4503E3-57C7-425C-9A4B-CDBA7092D8EA - a3584e64e8970300"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "5D4503E3-57C7-425C-9A4B-CDBA7092D8EA - eee6b4abf05aed05"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "5D4503E3-57C7-425C-9A4B-CDBA7092D8EA - 2a7532deff1cd77b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "193"
+                  endingLineNumber = "193"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "5D4503E3-57C7-425C-9A4B-CDBA7092D8EA - 2a7532deff1cd71a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ChatListReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A - c4b1d50354e04545"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A - 9d26f36688c6d02b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A - 73e8976a4973c127"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A - fa83d3e3fded7000"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "3636B9A8-06B3-460E-A288-10BB79622B8A - 142abdd09d70588d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C6B8E8E3-B112-4041-8D81-76CCC0CDDA93"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Reducer/ChatListReducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "C6B8E8E3-B112-4041-8D81-76CCC0CDDA93 - 142abdd09d705995"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  uuid = "C6B8E8E3-B112-4041-8D81-76CCC0CDDA93 - a49140682334a6ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "272">
+               </Location>
+               <Location
+                  uuid = "C6B8E8E3-B112-4041-8D81-76CCC0CDDA93 - 383f5a0b1a2b3f4c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 (inout Swift.TaskGroup&lt;()&gt;) async -&gt; () in closure #4 @Sendable (ComposableArchitecture.Send&lt;Switch.ChatListReducer.ChatListAction&gt;) async -&gt; () in closure #1 (inout Switch.ChatListReducer.ChatListState, Switch.ChatListReducer.ChatListAction) -&gt; ComposableArchitecture.Effect&lt;Switch.ChatListReducer.ChatListAction&gt; in Switch.ChatListReducer.body.getter : some"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Reducer/ChatListReducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B93352AD-8163-4A51-95C2-39E6923B0070"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-composable-architecture/Sources/ComposableArchitecture/Store.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
+            landmarkName = "finish()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B93352AD-8163-4A51-95C2-39E6923B0070 - 7406e4cdb1cd6d01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ComposableArchitecture.StoreTask.finish() async -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-composable-architecture/Sources/ComposableArchitecture/Store.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "867"
+                  endingLineNumber = "867"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "B93352AD-8163-4A51-95C2-39E6923B0070 - 79dc251a41f6fea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for ComposableArchitecture.StoreTask.finish() async -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-composable-architecture/Sources/ComposableArchitecture/Store.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "867"
+                  endingLineNumber = "867"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "B93352AD-8163-4A51-95C2-39E6923B0070 - f2e62dbf61e30a99"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for ComposableArchitecture.StoreTask.finish() async -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-composable-architecture/Sources/ComposableArchitecture/Store.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "867"
+                  endingLineNumber = "867"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0827AA65-75EC-465C-94F4-E5551FCE18BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Task.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "cancellableValue"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B442516C-3806-4830-9DD6-BDDDCBB8F8B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Task.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "cancellableValue"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "B442516C-3806-4830-9DD6-BDDDCBB8F8B6 - 54199153c5bc9d29"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () async -&gt; &#x3c4;_0_0 in Swift.Task&lt; where &#x3c4;_0_1 == Swift.Never&gt;.cancellableValue.getter : &#x3c4;_0_0"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Task.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "B442516C-3806-4830-9DD6-BDDDCBB8F8B6 - c856ad8a42b9e628"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for closure #1 () async -&gt; &#x3c4;_0_0 in Swift.Task&lt; where &#x3c4;_0_1 == Swift.Never&gt;.cancellableValue.getter : &#x3c4;_0_0"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Library/Developer/Xcode/DerivedData/Switch-hjzpivzethnwqndbdqsmnueceidp/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Task.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F417BAAD-7F49-4230-8885-EBA9DA6F099F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Utils/TextReaderManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "read(text:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Utils/TextReaderManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "read(text:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9 - 4f4ba27cd6c35ab0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9 - adf9cd2c0b173df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9 - f75073a210fabeb2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9 - 5b5adc850ded00b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "4A3D9F7D-5501-49E7-B38F-8D8CE35E8BB9 - 3e61b3158df01e33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.CheckedContinuation&lt;(), Swift.Error&gt;) -&gt; () in Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3496320A-F783-4800-83D8-AF844B9BEBB2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Switch/Utils/TextReaderManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "read(text:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3496320A-F783-4800-83D8-AF844B9BEBB2 - 3e61b3158df01ed6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.CheckedContinuation&lt;(), Swift.Error&gt;) -&gt; () in Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "1120">
+               </Location>
+               <Location
+                  uuid = "3496320A-F783-4800-83D8-AF844B9BEBB2 - 3e61b3158df01ed6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.CheckedContinuation&lt;(), Swift.Error&gt;) -&gt; () in Switch.TextReaderManager.read(text: Swift.String) async throws -&gt; ()"
+                  moduleName = "Switch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yugo.a.sugiyama/Dev/Swift/Switch/Switch/Utils/TextReaderManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "704">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

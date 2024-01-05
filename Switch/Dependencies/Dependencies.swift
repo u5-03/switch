@@ -10,13 +10,13 @@ import Dependencies
 
 extension DependencyValues {
     var multipeerConnectivityClient: MultipeerConnectivityClient {
-    get { self[MultipeerConnectivityClient.self] }
-    set { self[MultipeerConnectivityClient.self] = newValue }
-  }
+        get { self[MultipeerConnectivityClient.self] }
+        set { self[MultipeerConnectivityClient.self] = newValue }
+    }
 }
 
 extension MultipeerConnectivityClient: DependencyKey {
-  public static let testValue = Self.live
-  public static var liveValue = Self.live
+    public static let testValue = Self.live
+    public static var liveValue = Self.live
 }
 

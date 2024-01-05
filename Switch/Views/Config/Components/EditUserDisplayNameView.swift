@@ -9,24 +9,24 @@ import SwiftUI
 import ComposableArchitecture
 
 struct EditUserDisplayNameView: View {
-    let store: StoreOf<Feature>
+    let configStore: StoreOf<ConfigReducer>
 
-    init(store: StoreOf<Feature>) {
-        self.store = store
+    init(configStore: StoreOf<ConfigReducer>) {
+        self.configStore = configStore
 #if os(iOS)
         UITextField.appearance().clearButtonMode = .whileEditing
 #endif
     }
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(configStore, observe: { $0 }) { viewStore in
             NavigationStack {
                 VStack {
-                    TextField(viewStore.mcState.userDisplayName, text:
+                    TextField(viewStore.sharedState.userDisplayName, text:
                                 Binding(get: {
-                        return viewStore.mcState.userDisplayName
+                        return viewStore.sharedState.userDisplayName
                     }, set: { value, _ in
-                        viewStore.send(.configAction(action: .didChangedUserDisplayNameText(name: value)))
+                        viewStore.send(.didChangedUserDisplayNameText(name: value))
                     }))
                     .textFieldStyle(.roundedBorder)
                     .padding()
@@ -39,7 +39,7 @@ struct EditUserDisplayNameView: View {
 }
 
 #Preview {
-    EditUserDisplayNameView(store: .init(initialState: .init(), reducer: {
-        Feature()
+    EditUserDisplayNameView(configStore: .init(initialState: .init(), reducer: {
+        ConfigReducer()
     }))
 }

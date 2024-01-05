@@ -9,11 +9,6 @@ import Foundation
 import MultipeerConnectivity
 import ComposableArchitecture
 
-struct PeerInfo: Identifiable, Equatable {
-    let id = UUID().uuidString
-    let peerId: MCPeerID
-}
-
 enum MultipeerConnectivityDelegateAction: Equatable {
     case sessionDidChanaged(peerID: MCPeerID, state: MCSessionState)
     case sessionDidReceived(data: Data, peerID: MCPeerID)
@@ -49,8 +44,7 @@ enum ConfigAction: Equatable {
     case didTapAdvertisingPeerButton
     case switchHostMode
     case didCloseBrowserView
-    case setSheet(isPresented: Bool)
-//    case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
+    //    case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
     case mcBrowserSheet(action: PresentationAction<ConfigAction.BrowserViewAction>)
     case advertiserInvitationAlertAction(action: AdvertiserInvitationAlertAction)
 
@@ -59,7 +53,7 @@ enum ConfigAction: Equatable {
     case toggleReceiveMessageDisplayOnlyMode
     case didChangedUserDisplayNameText(name: String)
 
-    enum AdvertiserInvitationAlertAction: Equatable {
+    enum AdvertiserInvitationAlertAction: Equatable { // 
         case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
         case didTapAdvertiserInvitationCancelButton(info: AdvertiserInvitationInfo)
     }
@@ -70,12 +64,12 @@ enum ConfigAction: Equatable {
 }
 
 struct MultipeerConnectivityState: Equatable {
-    var connectedPeerInfos: [PeerInfo] = []
-    var connectionCandidatePeerInfos: [PeerInfo] = []
-    var isStartAdvertisingPeer = false
+//    var connectedPeerInfos: [PeerInfo] = []
+//    var connectionCandidatePeerInfos: [PeerInfo] = []
+    var isStartAdvertisingPeer = false //
     var shouldShowAdvertiserInvitationAlert = false
-    var userMode: MCMode = .host
-    var userDisplayName = "" {
+    var userMode: MCMode = .host //
+    var userDisplayName = "" { // 
         didSet {
             UserDefaults.standard.userDisplayName = userDisplayName
             if !userDisplayName.isEmpty {
@@ -83,30 +77,15 @@ struct MultipeerConnectivityState: Equatable {
             }
         }
     }
-    var isReadTextEnable = false {
-        didSet {
-            UserDefaults.standard.isReadTextEnable.toggle()
-        }
-    }
-    var isGuestReadTextEnable = false {
-        didSet {
-            UserDefaults.standard.isGuestReadTextEnable.toggle()
-        }
-    }
-    var isReceiveMessageDisplayOnlyMode = false {
-        didSet {
-            UserDefaults.standard.isReceiveMessageDisplayOnlyMode.toggle()
-        }
-    }
 
-//    var isBrowserViewPresented = false
-//    @PresentationState var advertiserInvitationAlertState: AlertState<Feature.Action>?
+    //    var isBrowserViewPresented = false
+    //    @PresentationState var advertiserInvitationAlertState: AlertState<Feature.Action>?
     @PresentationState var browserViewPresentationState: MultipeerConnectivityState?
 
     init() {
-        isReadTextEnable = UserDefaults.standard.isReadTextEnable
-        isGuestReadTextEnable = UserDefaults.standard.isGuestReadTextEnable
-        isReceiveMessageDisplayOnlyMode = UserDefaults.standard.isReceiveMessageDisplayOnlyMode
+//        isReadTextEnable = UserDefaults.standard.isReadTextEnable
+//        isGuestReadTextEnable = UserDefaults.standard.isGuestReadTextEnable
+//        isReceiveMessageDisplayOnlyMode = UserDefaults.standard.isReceiveMessageDisplayOnlyMode
         userDisplayName = UserDefaults.standard.userDisplayName
     }
 }

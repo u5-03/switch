@@ -11,19 +11,22 @@ import ComposableArchitecture
 
 @MainActor
 struct ChatListView: View {
-    let store: StoreOf<Feature>
+    let chatListStore: StoreOf<ChatListReducer>
     @State var text = ""
     @State var isFlag = false
+    @FocusState private var isTextFieldFocused: Bool
+    @State private var storeTask: StoreTask?
 
     private var scrollView: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
+        WithViewStore(chatListStore, observe: { $0 }) { viewStore in
             ScrollView {
                 VStack(spacing: 8) {
                     ForEach(viewStore.adjustedMessages) { type in
                         HStack {
                             ChatBubbleView(
                                 type: type,
-                                isReceiveMessageDisplayOnlyMode: viewStore.mcState.isReceiveMessageDisplayOnlyMode) { action in
+                                isReceiveMessageDisplayOnlyMode: UserDefaults.standard.isReceiveMessageDisplayOnlyMode) { action in
+//                                isReceiveMessageDisplayOnlyMode: viewStore.mcState.isReceiveMessageDisplayOnlyMode) { action                                     in
                                     switch action {
                                     case .delete(let messageItem):
                                         viewStore.send(.didTapMessageDeleteButton(messageItem: messageItem))
@@ -45,17 +48,19 @@ struct ChatListView: View {
     }
 
     private var textFieldView: some View {
-        return WithViewStore(store, observe: { $0 }) { viewStore in
+        return WithViewStore(chatListStore, observe: { $0 }) { viewStore in
             HStack {
-                TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged))
+                TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: ChatListReducer.ChatListAction.textChanged))
                 // axis: .verticalを指定すると、macのキーボードで入力した時に、Enterが効かなくなるので、一時的に外す
 //                TextField("Enter text", text: viewStore.binding(get: \.newMessage, send: Feature.Action.textChanged), axis: .vertical)
                     .autocorrectionDisabled()
                 // これがないと、最初の日本語文字入力時に、確定状態になる
                     .submitLabel(.send)
                     .textFieldStyle(.roundedBorder)
+                    .focused($isTextFieldFocused)
                 Button(action: {
                     if !viewStore.newMessage.trimmed().isEmpty {
+                        isTextFieldFocused = false
                         _ = withAnimation(.easeInOut) {
                             viewStore.send(.didTapSendButton)
                         } completion: {
@@ -63,7 +68,7 @@ struct ChatListView: View {
                         }
                     }
                 }, label: {
-                    Text("Send")
+                    Image(systemName: "paperplane.fill")
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                         .background(Color.blue)
@@ -71,14 +76,13 @@ struct ChatListView: View {
                         .clipShape(Capsule())
                 })
                 .controlSize(.regular)
-
             }
             .padding()
         }
     }
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(chatListStore, observe: { $0 }) { viewStore in
             NavigationStack {
                 ScrollViewReader { scrollViewProxy in
                     // Listを使うと、insertのアニメーションとscrollToBottomのアニメーションがうまく動かない
@@ -90,33 +94,23 @@ struct ChatListView: View {
                             }
                         }
                 }
-                .navigationTitle("Switch")
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            viewStore.send(.didTapConfigButton)
-                        } label: {
-                            Image(systemName: "gearshape.fill")
-                                .tint(Color(.systemGray))
-                        }
-                    }
+                .onTapGesture {
+                    isTextFieldFocused = false
                 }
-                .sheet(
-                    isPresented: viewStore.binding(
-                        get: { $0.isConfigPresented },
-                        send: { .toggleConfigButtonPresented }()
-                    ), content: {
-                        ConfigView(store: store)
-                    }
-                )
-                .task { await viewStore.send(.task).finish() }
+                .navigationTitle("Switch")
+            }
+            .task {
+                storeTask?.cancel()
+                storeTask = viewStore.send(.task)
+                // 以下のコードでは、tabを切り替えた時にcancelされてしまい、streamの変更を受け取ることができない￥
+                // viewStore.send(.task).finish()
             }
         }
     }
 }
 
 private extension ChatListView {
-    func scrollToBottom(id: String, scrollViewProxy: ScrollViewProxy, viewStore: ViewStore<Feature.AppState, Feature.Action>) {
+    func scrollToBottom(id: String, scrollViewProxy: ScrollViewProxy, viewStore: ViewStore<ChatListReducer.State, ChatListReducer.Action>) {
         DispatchQueue.main.async {
             withAnimation {
                 scrollViewProxy.scrollTo(id)
@@ -129,7 +123,7 @@ private extension ChatListView {
 }
 
 #Preview {
-    ChatListView(store: .init(initialState: .init(), reducer: {
-        Feature()
+    ChatListView(chatListStore: .init(initialState: .init(), reducer: {
+        ChatListReducer()
     }))
 }
