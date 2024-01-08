@@ -72,6 +72,7 @@ enum SharedAction {
 struct SharedState: Equatable {
     //    var multipeerConnectivityState: MultipeerConnectivityState?
     var connectedPeerInfos: [PeerInfo] = []
+    var connectionCandidatePeerInfos: [PeerInfo] = []
     var isReadTextEnable = false {
         didSet {
             print("didSet isReadTextEnable: \(isReadTextEnable)")
@@ -99,12 +100,14 @@ struct SharedState: Equatable {
 
     init(
         connectedPeerInfos: [PeerInfo] = [],
+        connectionCandidatePeerInfos: [PeerInfo] = [],
         isReadTextEnable: Bool,
         isReceiveMessageDisplayOnlyMode: Bool,
         isGuestReadTextEnable: Bool,
         userDisplayName: String
     ) {
         self.connectedPeerInfos = connectedPeerInfos
+        self.connectionCandidatePeerInfos = connectionCandidatePeerInfos
         self.isReadTextEnable = isReadTextEnable
         self.isReceiveMessageDisplayOnlyMode = isReceiveMessageDisplayOnlyMode
         self.isGuestReadTextEnable = isGuestReadTextEnable
@@ -150,19 +153,13 @@ extension SharedStateClient: DependencyKey {
         let subject = PassthroughSubject<SharedState, Never>()
         return Self(
             get: {
-                print("SharedStateReducer: SharedStateClient State get \(sharedState.value)")
                 return sharedState.value
             },
             set: { updatedSharedState in
                 sharedState.withValue {
-                    print("SharedStateReducer: SharedStateClient 1 Old State set: \($0.isReadTextEnable), Updated State: \(updatedSharedState.isReadTextEnable)")
                     $0 = updatedSharedState
-                    print("SharedStateReducer: SharedStateClient 2 Old State set: \($0.isReadTextEnable), Updated State: \(updatedSharedState.isReadTextEnable)")
-                    print("SharedStateReducer: SharedStateClient get \(sharedState.value.isReadTextEnable)")
                     subject.send(updatedSharedState)
-                    print("SharedStateReducer: SharedStateClient SharedStateStream send stream \(updatedSharedState.isReadTextEnable)")
                 }
-
             },
             stream: {
                 subject.values.eraseToStream()

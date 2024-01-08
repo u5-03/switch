@@ -10,7 +10,6 @@ import MultipeerConnectivity
 import ComposableArchitecture
 import Combine
 
-
 struct MultipeerConnectivitySendableBox: Sendable {
     @UncheckedSendable var manager: MCManager
     var delegate: MultipeerConnectivityDelegate

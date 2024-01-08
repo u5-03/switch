@@ -62,10 +62,12 @@ struct ConfigView: View {
 
     @ViewBuilder
     var connectedDevicesView: some View {
-        if !MCManager.shared.connectedDevices.isEmpty {
-            Section("接続済みデバイス") {
-                ForEach(sharedState.get().connectedPeerInfos) { info in
-                    Text(info.peerId.displayName)
+        WithViewStore(configStore, observe: { $0 }) { viewStore in
+            if !MCManager.shared.connectedDevices.isEmpty {
+                Section("接続済みデバイス") {
+                    ForEach(viewStore.sharedState.connectedPeerInfos) { info in
+                        Text(info.peerId.displayName)
+                    }
                 }
             }
         }
@@ -115,7 +117,6 @@ struct ConfigView: View {
         }
     }
 
-
     var body: some View {
         WithViewStore(configStore, observe: { $0 }) { viewStore in
             NavigationStack {
@@ -124,29 +125,31 @@ struct ConfigView: View {
                     connectedDevicesView
                     appSettingView
                     informationView
+#if os(macOS)
+                    Spacer()
+                        .frame(height: 40)
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("close")
+                    }
+                    .controlSize(.large)
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+#endif
                 }
                 .sheet(
                     isPresented: viewStore.binding(
                         get: \.isMcBrowserSheetPresented,
-                        send: { ConfigReducer.ConfigAction.switchMcBrowserSheet(isPresented: $0) }
+                        send: { ConfigReducer.Action.switchMcBrowserSheet(isPresented: $0) }
                     )
                 ) {
                     NavigationStack {
                         MCBrowserViewControllerWrapper(serviceType: sessionType, peerID: myPeerID, session: session)
-                            .navigationTitle("受信デバイスを探す")
-                        //                            .toolbar {
-                        //                                ToolbarItem {
-                        //                                    Button {
-                        //                                        dismiss()
-                        //                                    } label: {
-                        //                                        Text("閉じる")
-                        //                                    }
-                        //                                }
-                        //                            }
+                            .navigationTitle(.init(String(localized: "Config.Widget.findDevices", defaultValue: "受信デバイスを探す")))
                     }
                 }
-                .alert(store: configStore.scope(state: \.$advertiserInvitationAlertState, action: ConfigReducer.ConfigAction.advertiserInvitationAlert))
-                .navigationTitle("設定")
+                .navigationTitle(.init(String(localized: "Config.title", defaultValue: "設定")))
             }
         }
     }

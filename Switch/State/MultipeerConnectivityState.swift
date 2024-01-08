@@ -34,38 +34,9 @@ enum MultipeerConnectivityDelegateAction: Equatable {
     }
 }
 
-//struct AlertAndSheetState: Equatable {
-//    var actionSheet: ActionSheetState<ConfigAction.AdvertiserInvitationAlertAction>?
-//  var alert: AlertState<ConfigAction>?
-//  var count = 0
-//}
-
-enum ConfigAction: Equatable {
-    case didTapAdvertisingPeerButton
-    case switchHostMode
-    case didCloseBrowserView
-    //    case advertiserInvitationAlert(action: PresentationAction<ConfigAction.AdvertiserInvitationAlertAction>)
-    case mcBrowserSheet(action: PresentationAction<ConfigAction.BrowserViewAction>)
-    case advertiserInvitationAlertAction(action: AdvertiserInvitationAlertAction)
-
-    case toggleReadTextEnable
-    case toggleGuestReadTextEnable
-    case toggleReceiveMessageDisplayOnlyMode
-    case didChangedUserDisplayNameText(name: String)
-
-    enum AdvertiserInvitationAlertAction: Equatable { // 
-        case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
-        case didTapAdvertiserInvitationCancelButton(info: AdvertiserInvitationInfo)
-    }
-
-    enum BrowserViewAction: Equatable {
-        case tap
-    }
-}
-
 struct MultipeerConnectivityState: Equatable {
-//    var connectedPeerInfos: [PeerInfo] = []
-//    var connectionCandidatePeerInfos: [PeerInfo] = []
+    var connectedPeerInfos: [PeerInfo] = []
+    var connectionCandidatePeerInfos: [PeerInfo] = []
     var isStartAdvertisingPeer = false //
     var shouldShowAdvertiserInvitationAlert = false
     var userMode: MCMode = .host //
@@ -78,14 +49,9 @@ struct MultipeerConnectivityState: Equatable {
         }
     }
 
-    //    var isBrowserViewPresented = false
-    //    @PresentationState var advertiserInvitationAlertState: AlertState<Feature.Action>?
     @PresentationState var browserViewPresentationState: MultipeerConnectivityState?
 
     init() {
-//        isReadTextEnable = UserDefaults.standard.isReadTextEnable
-//        isGuestReadTextEnable = UserDefaults.standard.isGuestReadTextEnable
-//        isReceiveMessageDisplayOnlyMode = UserDefaults.standard.isReceiveMessageDisplayOnlyMode
         userDisplayName = UserDefaults.standard.userDisplayName
     }
 }

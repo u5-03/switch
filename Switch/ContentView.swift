@@ -19,12 +19,8 @@ struct ContentView: View {
     var body: some View {
         RootTabView(store: .init(initialState: .init(), reducer: {
             RootTabReducer()
+                .dependency(\.multipeerConnectivityClient, .liveValue)
         }))
-//        ChatListView(store: .init(initialState: .init(), reducer: {
-//            Feature()
-//                .dependency(\.multipeerConnectivityClient, .liveValue)
-////                .dependency(\.multipeerConnectivityClient, .mock)
-//        }))
     }
 }
 

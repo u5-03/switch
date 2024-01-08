@@ -56,15 +56,11 @@ struct ChatListReducer: Reducer {
     typealias State = ChatListReducer.ChatListState
     typealias Action = ChatListReducer.ChatListAction
     @Dependency(\.sharedState) var sharedState
-    @Dependency(\.multipeerConnectivityClient) var multipeerConnectivityClient
     private var task: Task<Void, Never>?
 
     struct ChatListState: Equatable {
         var newMessage: String = ""
         fileprivate var messages: [MessageCreaterType] = []
-        @PresentationState var advertiserInvitationAlertState: AlertState<ConfigAction.AdvertiserInvitationAlertAction>?
-
-
         var scrollToRowId: String?
         var adjustedMessages: [MessageCreaterType] {
             if UserDefaults.standard.isReceiveMessageDisplayOnlyMode {
@@ -73,11 +69,7 @@ struct ChatListReducer: Reducer {
                 return messages
             }
         }
-        @BindingState public var sharedState: SharedState {
-            didSet {
-                print("ChatListReducer: didSet \(sharedState.isReadTextEnable)")
-            }
-        }
+        @BindingState public var sharedState: SharedState
 
         init(
             newMessage: String = "",
@@ -88,18 +80,9 @@ struct ChatListReducer: Reducer {
 
             self.newMessage = newMessage
             self.messages = messages
-            self.advertiserInvitationAlertState = nil
             self.scrollToRowId = scrollToRowId
             self.sharedState = sharedState.get()
         }
-
-
-        //        static func == (lhs: State, rhs: State) -> Bool {
-        //            return lhs.userMode == rhs.userMode &&
-        //            lhs.isStartAdvertisingPeer == rhs.isStartAdvertisingPeer &&
-        //            lhs.isMcBrowserSheetPresented == rhs.isMcBrowserSheetPresented &&
-        //            lhs.advertiserInvitationAlertState == rhs.advertiserInvitationAlertState
-        //        }
     }
 
     enum ChatListAction: BindableAction, Equatable {
@@ -113,10 +96,9 @@ struct ChatListReducer: Reducer {
         case readMessage
         case didErrorReading(index: Int)
         case didScrollToBottom
-        case task
-        case mcAction(action: MultipeerConnectivityDelegateAction)
         case binding(BindingAction<State>)
         case updateSharedState(SharedState)
+        case didReceiveMessage(messageItem: MessageItem)
 
         enum AdvertiserInvitationAlertAction: Equatable {
             case didTapAdvertiserInvitationOkButton(info: AdvertiserInvitationInfo)
@@ -182,86 +164,33 @@ struct ChatListReducer: Reducer {
                 if state.sharedState != sharedState {
                     state.sharedState = sharedState
                 }
-            case .task:
-                print("SharedStateStream task init")
-                return .run { send in
-//                    await send(.updateSharedState(sharedState.get()))
-                    await withThrowingTaskGroup(of: Void.self) { group in
-                        group.addTask {
-                            await withTaskCancellation(id: CancelID.multipeerConnectivity, cancelInFlight: true) {
-                                for await action in await multipeerConnectivityClient.delegate() {
-                                    await send(.mcAction(action: action), animation: .default)
-                                }
-                            }
-                        }
-                        group.addTask {
-                            for await sharedState in self.sharedState.stream() {
-                                print("SharedStateStream: receive \(sharedState.isReadTextEnable)")
-                                await send(.updateSharedState(sharedState))
-                            }
-                        }
-                    }
-                    //                    self.task = task
-                }
             case .binding(\.$sharedState):
                 return .none
             case .binding: // ここはその他の`binding`が流れてくる(今回はなし)
                 return .none
-            case .mcAction(let action):
-                switch action {
-                case .sessionDidChanaged(_, _):
-                    //                    state.mcState.connectedPeerInfos = MCManager.shared.mcSession.connectedPeers
-                    //                        .map({ PeerInfo(peerId: $0) })
-                    break
-                case .sessionDidReceived(let data, let peerID):
-                    guard let message = String(data: data, encoding: .utf8) else { return .none }
-                    let messageItem = MessageItem(message: message, date: Date(), displayUserName: peerID.displayName, readingStatus: .willRead)
-                    state.messages.append(.other(messageItem: messageItem))
-                    let effect: Effect<ChatListReducer.Action> = {
-                        return .none
-                        //                        if state.mcState.isGuestReadTextEnable {
-                        //                            return .send(.readMessage)
-                        //                        } else {
-                        //                            return updateMessageItem(
-                        //                                index: state.messages.count - 1,
-                        //                                readingStatus: .readCompleted,
-                        //                                state: &state
-                        //                            )
-                        //                        }
-                    }()
-                    return .concatenate(
-                        Effect<ChatListReducer.Action>.send(.willScrollToBottom),
-                        effect
-                    )
-
-                case .advertiserDidReceiveInvitationFromPeer(let peerID, _, let invitationHandler):
-                    let info = AdvertiserInvitationInfo(peerId: peerID, invitationHandler: invitationHandler)
-                    state.advertiserInvitationAlertState = .init(
-                        title: .init("ホストから招待が届きました"),
-                        message: .init("ホストからの招待を承認しますか？"),
-                        primaryButton: .cancel(
-                            .init("キャンセル"),
-                            action: .send(.didTapAdvertiserInvitationCancelButton(info: info))
-                        ),
-                        secondaryButton: .default(
-                            .init("承認"),
-                            action: .send(.didTapAdvertiserInvitationOkButton(info: info))
+            case .didReceiveMessage(messageItem: let messageItem):
+                state.messages.append(.other(messageItem: messageItem))
+                let effect: Effect<ChatListReducer.Action> = {
+                    if state.sharedState.isGuestReadTextEnable {
+                        return .send(.readMessage)
+                    } else {
+                        return updateMessageItem(
+                            index: state.messages.count - 1,
+                            readingStatus: .readCompleted,
+                            state: &state
                         )
-                    )
-                case .browserFound(_, let foundPeerId, _):
-                    state.mcState.connectionCandidatePeerInfos.append(.init(peerId: foundPeerId))
-                    break
-                case .browserLost(_, let lostPeerId):
-                    break
-                    //                    state.mcState.connectionCandidatePeerInfos.removeAll(where: { $0.peerId == lostPeerId })
-                }
-                return .none
-
+                    }
+                }()
+                return .concatenate(
+                    Effect<ChatListReducer.Action>.send(.willScrollToBottom),
+                    effect
+                )
             }
             return .none
         }
     }
 }
+
 
 private extension ChatListReducer {
     func readText(state: inout ChatListReducer.State) -> Effect<ChatListReducer.Action> {
@@ -328,5 +257,12 @@ private extension ChatListReducer {
             }
         }
         return .none
+    }
+}
+
+// Ref: https://zenn.dev/kalupas226/articles/87b1f7b245915c#%E5%95%8F%E9%A1%8C%E3%81%AE%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95
+extension ChatListReducer.ChatListState {
+    mutating func update(messageItem: MessageItem) -> Effect<ChatListReducer.Action> {
+        return .send(.didReceiveMessage(messageItem: messageItem))
     }
 }

@@ -26,7 +26,6 @@ struct ChatListView: View {
                             ChatBubbleView(
                                 type: type,
                                 isReceiveMessageDisplayOnlyMode: UserDefaults.standard.isReceiveMessageDisplayOnlyMode) { action in
-//                                isReceiveMessageDisplayOnlyMode: viewStore.mcState.isReceiveMessageDisplayOnlyMode) { action                                     in
                                     switch action {
                                     case .delete(let messageItem):
                                         viewStore.send(.didTapMessageDeleteButton(messageItem: messageItem))
@@ -58,6 +57,9 @@ struct ChatListView: View {
                     .submitLabel(.send)
                     .textFieldStyle(.roundedBorder)
                     .focused($isTextFieldFocused)
+                    .onAppear {
+                        setupEventMonitor(viewStore: viewStore)
+                    }
                 Button(action: {
                     if !viewStore.newMessage.trimmed().isEmpty {
                         isTextFieldFocused = false
@@ -69,13 +71,10 @@ struct ChatListView: View {
                     }
                 }, label: {
                     Image(systemName: "paperplane.fill")
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
                 })
                 .controlSize(.regular)
+                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
             }
             .padding()
         }
@@ -97,13 +96,7 @@ struct ChatListView: View {
                 .onTapGesture {
                     isTextFieldFocused = false
                 }
-                .navigationTitle("Switch")
-            }
-            .task {
-                storeTask?.cancel()
-                storeTask = viewStore.send(.task)
-                // 以下のコードでは、tabを切り替えた時にcancelされてしまい、streamの変更を受け取ることができない￥
-                // viewStore.send(.task).finish()
+                .navigationTitle(String(localized: "AppName", defaultValue: "Switch"))
             }
         }
     }
@@ -119,6 +112,21 @@ private extension ChatListView {
                 viewStore.send(.didScrollToBottom)
             }
         }
+    }
+
+    // Macでのショートカットキーの登録
+    func setupEventMonitor(viewStore: ViewStore<ChatListReducer.State, ChatListReducer.Action>) {
+        #if os(macOS)
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            // 36はReturnキーのキーコード
+            if event.modifierFlags.contains(.command) && event.keyCode == 36 {
+                print("key pressed!: \(viewStore.newMessage)")
+                viewStore.send(.didTapSendButton)
+                return nil  // イベントを消費する
+            }
+            return event  // その他のイベントは通常通りに処理する
+        }
+        #endif
     }
 }
 
